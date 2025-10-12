@@ -1,6 +1,8 @@
 package com.sinisterorder.app;
 
 import com.google.gson.Gson;
+import com.sinisterorder.item.Item;
+import com.sinisterorder.item.ItemFactory;
 import com.sinisterorder.item.itemreader.ItemReader;
 
 /**
@@ -9,8 +11,5 @@ import com.sinisterorder.item.itemreader.ItemReader;
 public class App {
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		ItemReader itemReader=new ItemReader();
-
-		System.out.println(itemReader.itemFactory("itemID"));
 	}
 }

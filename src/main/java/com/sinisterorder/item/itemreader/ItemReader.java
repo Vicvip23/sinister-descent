@@ -7,7 +7,7 @@ import java.io.FileReader;
 
 public class ItemReader {
 
-    public Item itemFactory(String itemID){
+    public Item read(String itemID){
         Gson gson = new Gson();
 
          try {
