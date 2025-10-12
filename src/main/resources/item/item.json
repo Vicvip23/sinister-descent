@@ -1,12 +1,12 @@
 [
   {
-    "itemID":"itemID1",
+    "itemId":"test_item",
     "itemName":"itemName",
     "sellValue":1,
     "description":"example description"
   },
   {
-    "itemID":"itemID2",
+    "itemId":"itemID2",
     "itemName":"itemName",
     "sellValue":2,
     "description":"example description"

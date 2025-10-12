@@ -3,8 +3,6 @@ package com.sinisterorder.app;
 import com.google.gson.Gson;
 import com.sinisterorder.item.Item;
 import com.sinisterorder.item.ItemFactory;
-import com.sinisterorder.item.itemreader.ItemReader;
-
 /**
  * Hello world!
  */

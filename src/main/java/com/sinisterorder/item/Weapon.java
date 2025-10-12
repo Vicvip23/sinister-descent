@@ -1,5 +1,5 @@
 package com.sinisterorder.item;
 
-public class Weapon {
+public class Weapon extends Item{
 
 }
