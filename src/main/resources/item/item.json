@@ -1,1 +1,14 @@
-
+[
+  {
+    "itemID":"itemID1",
+    "itemName":"itemName",
+    "sellValue":1,
+    "description":"example description"
+  },
+  {
+    "itemID":"itemID2",
+    "itemName":"itemName",
+    "sellValue":2,
+    "description":"example description"
+  }
+]
