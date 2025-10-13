@@ -8,7 +8,7 @@ public class ItemFactory {
 	
 	Gson gson = new Gson();
 	
-	public Item fromJson(String itemID, String type){
+	public Item fromJson(String itemId, String type){
 
 		switch (type) {
 			case "item":
@@ -17,7 +17,7 @@ public class ItemFactory {
 					Item[] items = gson.fromJson(reader, Item[].class);
 
 					for (Item item : items) {
-						if(itemID.equals(item.itemId)){
+						if(itemId.equals(item.getId())){
 						return item;
 						}
 					}
@@ -33,7 +33,7 @@ public class ItemFactory {
 					Weapon[] items = gson.fromJson(reader, Weapon[].class);
 
 					for (Weapon item : items) {
-						if(itemID.equals(item.itemId)){
+						if(itemId.equals(item.getId())){
 							return item;
 						}
 					}
@@ -49,7 +49,7 @@ public class ItemFactory {
 					Consumable[] items = gson.fromJson(reader, Consumable[].class);
 
 					for (Consumable item : items) {
-						if(itemID.equals(item.itemId)){
+						if(itemId.equals(item.getId())){
 						return item;
 					}
 				}
