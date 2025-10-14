@@ -1,17 +1,15 @@
 package com.sinisterorder.item;
 
-import java.util.ArrayList;
-
 public class Weapon extends Item{
 	private int damage;
 	private String attackset;
-	private ArrayList<String> uniqueAttacks;
+	private String[] uniqueAttacks;
 
 	public int getDamage() {
 		return this.damage;
 	}
 
-	public ArrayList<String> getUniqueAttacks() {
+	public String[] getUniqueAttacks() {
 		return this.uniqueAttacks;
 	}
 
