@@ -2,18 +2,21 @@ package com.sinisterorder.item;
 
 import java.util.ArrayList;
 
-import com.sinisterorder.attack.Attack;
-
 public class Weapon extends Item{
 	private int damage;
-	private ArrayList<Attack> attacks;
+	private String attackset;
+	private ArrayList<String> uniqueAttacks;
 
 	public int getDamage() {
-		return damage;
+		return this.damage;
 	}
 
-	public ArrayList<Attack> getAttacks() {
-		return attacks;
+	public ArrayList<String> getUniqueAttacks() {
+		return this.uniqueAttacks;
+	}
+
+	public String getAttackset() {
+		return this.attackset;
 	}
 
 	@Override
