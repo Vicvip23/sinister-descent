@@ -1,6 +1,6 @@
 package com.sinisterorder.item;
 
-public class Weapon extends Item{
+public class Weapon extends GenericItem{
 	private int damage;
 	private String attackset;
 	private String[] uniqueAttacks;

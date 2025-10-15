@@ -8,15 +8,15 @@ public class ItemFactory {
 	
 	Gson gson = new Gson();
 	
-	public Item fromJson(String itemId, String type){
+	public GenericItem fromJson(String itemId, String type){
 
 		switch (type) {
 			case "item":
 				try {
 					FileReader reader = new FileReader("src/main/resources/item/item.json");
-					Item[] items = gson.fromJson(reader, Item[].class);
+					GenericItem[] items = gson.fromJson(reader, GenericItem[].class);
 
-					for (Item item : items) {
+					for (GenericItem item : items) {
 						if(itemId.equals(item.getId())){
 						return item;
 						}
@@ -30,9 +30,9 @@ public class ItemFactory {
 			case "weapon":
 				try {
 					FileReader reader = new FileReader("src/main/resources/item/weapon.json");
-					Weapon[] items = gson.fromJson(reader, Weapon[].class);
+					GenericItem[] items = gson.fromJson(reader, GenericItem[].class);
 
-					for (Weapon item : items) {
+					for (GenericItem item : items) {
 						if(itemId.equals(item.getId())){
 							return item;
 						}
@@ -46,9 +46,9 @@ public class ItemFactory {
 			case "consumable":
 				try {
 					FileReader reader = new FileReader("src/main/resources/item/consumable.json");
-					Consumable[] items = gson.fromJson(reader, Consumable[].class);
+					GenericItem[] items = gson.fromJson(reader, GenericItem[].class);
 
-					for (Consumable item : items) {
+					for (GenericItem item : items) {
 						if(itemId.equals(item.getId())){
 						return item;
 					}
