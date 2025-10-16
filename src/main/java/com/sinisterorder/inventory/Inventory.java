@@ -9,15 +9,15 @@ public class Inventory {
 	public ItemManager itemManager;
 	public WeaponManager weaponManager;
 	public ConsumableManager consumableManager;
+	public ItemFactory itemFactory;
 
-	Inventory() {
+	public Inventory() {
 		this.itemManager = new ItemManager();
 		this.weaponManager = new WeaponManager();
 		this.consumableManager = new ConsumableManager();
-
+		this.itemFactory = new ItemFactory();
 	}
 
-	ItemFactory itemFactory = new ItemFactory();
 
 	public class ItemManager implements InventoryManagerInterface {
 
@@ -58,13 +58,15 @@ public class Inventory {
 		}
 
 		public void remove(String itemId, int amount) {
-			for (GenericItem item : items){
-				if(item.getId().equals(itemId)){
-					amount--;
-					if(amount > 0) {
-						items.remove(item.getId());
-					}else{
-						break;
+			for(int i = 0;i<items.size();i++){
+				for(int j = 0;j<i;j++){
+					if(items.get(j).getId().equals(itemId)) {
+						if(amount > 0){
+							items.remove(j);
+						}else{
+							break;
+						}
+						amount--;
 					}
 				}
 			}
@@ -110,13 +112,15 @@ public class Inventory {
 		}
 
 		public void remove(String weaponId, int amount) {
-			for (GenericItem weapon : weapons){
-				if(weapon.getId().equals(weaponId)){
-					amount--;
-					if(amount > 0) {
-						weapons.remove(weapon.getId());
-					}else{
-						break;
+			for(int i = 0;i<weapons.size();i++){
+				for(int j = 0;j<i;j++){
+					if(weapons.get(j).getId().equals(weaponId)) {
+						if(amount > 0){
+							weapons.remove(j);
+						}else{
+							break;
+						}
+						amount--;
 					}
 				}
 			}
@@ -163,13 +167,15 @@ public class Inventory {
 		}
 
 		public void remove(String consumableId, int amount) {
-			for (GenericItem consumable : consumables){
-				if(consumable.getId().equals(consumableId)){
-					amount--;
-					if(amount > 0) {
-						consumables.remove(consumable.getId());
-					}else{
-						break;
+			for(int i = 0;i<consumables.size();i++){
+				for(int j = 0;j<i;j++){
+					if(consumables.get(j).getId().equals(consumableId)) {
+						if(amount > 0){
+							consumables.remove(j);
+						}else{
+							break;
+						}
+						amount--;
 					}
 				}
 			}
