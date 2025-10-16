@@ -21,9 +21,9 @@ public class Inventory {
 
 	public class ItemManager implements InventoryManagerInterface {
 
-		private ArrayList<Item> items = new ArrayList<Item>();
+		private ArrayList<GenericItem> items = new ArrayList<GenericItem>();
 
-		public ArrayList<Item> list() {
+		public ArrayList<GenericItem> list() {
 			return items;
 		}
 
@@ -31,12 +31,12 @@ public class Inventory {
 			items.add(itemFactory.fromJson(itemId,"item"));
 		}
 
-		public Item get(int index) {
+		public GenericItem get(int index) {
 			return items.get(index);
 		}
 
-		public Item get(String itemId) {
-			for (Item item : items){
+		public GenericItem get(String itemId) {
+			for (GenericItem item : items){
 				if(item.getId().equals(itemId)){
 					return item;
 				}
@@ -49,7 +49,7 @@ public class Inventory {
 		}
 
 		public void remove(String itemId) {
-			for (Item item : items){
+			for (GenericItem item : items){
 				if(item.getId().equals(itemId)){
 					items.remove(item.getId());
 					break;
@@ -58,7 +58,7 @@ public class Inventory {
 		}
 
 		public void remove(String itemId, int amount) {
-			for (Item item : items){
+			for (GenericItem item : items){
 				if(item.getId().equals(itemId)){
 					amount--;
 					if(amount > 0) {
@@ -83,12 +83,12 @@ public class Inventory {
 			weapons.add(itemFactory.fromJson(weaponId,"weapon"));
 		}
 
-		public Weapon get(int index) {
+		public GenericItem get(int index) {
 			return weapons.get(index);
 		}
 
-		public Weapon get(String weaponId) {
-			for (Weapon weapon : weapons){
+		public GenericItem get(String weaponId) {
+			for (GenericItem weapon : weapons){
 				if(weapon.getId().equals(weaponId)){
 					return weapon;
 				}
@@ -101,7 +101,7 @@ public class Inventory {
 		}
 
 		public void remove(String weaponId) {
-			for (Weapon weapon : weapons){
+			for (GenericItem weapon : weapons){
 				if(weapon.getId().equals(weaponId)){
 					weapons.remove(weapon.getId());
 					break;
@@ -110,7 +110,7 @@ public class Inventory {
 		}
 
 		public void remove(String weaponId, int amount) {
-			for (Weapon weapon : weapons){
+			for (GenericItem weapon : weapons){
 				if(weapon.getId().equals(weaponId)){
 					amount--;
 					if(amount > 0) {
@@ -126,22 +126,22 @@ public class Inventory {
 
 	public class ConsumableManager implements InventoryManagerInterface {
 
-		private ArrayList<Consumable> consumables = new ArrayList<Consumable>();
+		private ArrayList<GenericItem> consumables = new ArrayList<GenericItem>();
 
-		public ArrayList<Consumable> list() {
+		public ArrayList<GenericItem> list() {
 			return consumables;
 		}
 
 		public void add(String consumableId) {
-			//consumables.add(itemFactory.fromJson(consumableId,"consumable"));
+			consumables.add(itemFactory.fromJson(consumableId,"consumable"));
 		}
 
-		public Consumable get(int index) {
+		public GenericItem get(int index) {
 			return consumables.get(index);
 		}
 
-		public Consumable get(String consumableId) {
-			for (Consumable consumable : consumables){
+		public GenericItem get(String consumableId) {
+			for (GenericItem consumable : consumables){
 				if(consumable.getId().equals(consumableId)){
 					return consumable;
 				}
@@ -154,7 +154,7 @@ public class Inventory {
 		}
 
 		public void remove(String consumableId) {
-			for (Consumable consumable : consumables){
+			for (GenericItem consumable : consumables){
 				if(consumable.getId().equals(consumableId)){
 					consumables.remove(consumable.getId());
 					break;
@@ -163,7 +163,7 @@ public class Inventory {
 		}
 
 		public void remove(String consumableId, int amount) {
-			for (Consumable consumable : consumables){
+			for (GenericItem consumable : consumables){
 				if(consumable.getId().equals(consumableId)){
 					amount--;
 					if(amount > 0) {
