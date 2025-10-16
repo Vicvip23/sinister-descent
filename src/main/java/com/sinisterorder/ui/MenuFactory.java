@@ -11,6 +11,7 @@ public class MenuFactory {
 	public Menu create(String menuId){
 		Menu menu;
 		try {
+			// TODO: Remove all printlns
 			System.out.println(menuId);
 			FileReader reader = new FileReader("src/main/resources/menu/" + menuId + "/root.json");
             	menu = gson.fromJson(reader, Menu.class);
