@@ -34,14 +34,15 @@ public class Inventory {
 		public GenericItem get(int index) {
 			return items.get(index);
 		}
+		public ArrayList<Integer> get(String itemId){
+			ArrayList<Integer> listInt = new ArrayList<Integer>();
 
-		public GenericItem get(String itemId) {
-			for (GenericItem item : items){
-				if(item.getId().equals(itemId)){
-					return item;
+			for(int i = 0; i< items.size(); i++){
+				if(items.get(i).getId().equals(itemId)) {
+					listInt.add(i);
 				}
 			}
-			return null;
+			return listInt;
 		}
 
 		public void remove(int index) {
@@ -49,28 +50,23 @@ public class Inventory {
 		}
 
 		public void remove(String itemId) {
-			for (GenericItem item : items){
-				if(item.getId().equals(itemId)){
-					items.remove(item.getId());
+			for(int i = 0; i<items.size(); i++){
+				if(items.get(i).getId().equals(itemId)) {
+					items.remove(i);
 					break;
+				}
+			}
+
+		}
+
+		public void remove(String itemId, int amount) {
+			for(int i = items.size() - 1; i >= 0 && amount > 0; --i, --amount){
+				if(items.get(i).getId().equals(itemId)) {
+					items.remove(i);
 				}
 			}
 		}
 
-		public void remove(String itemId, int amount) {
-			for(int i = 0;i<items.size();i++){
-				for(int j = 0;j<i;j++){
-					if(items.get(j).getId().equals(itemId)) {
-						if(amount > 0){
-							items.remove(j);
-						}else{
-							break;
-						}
-						amount--;
-					}
-				}
-			}
-		}
 	}
 
 	public class WeaponManager implements InventoryManagerInterface {
@@ -89,13 +85,15 @@ public class Inventory {
 			return weapons.get(index);
 		}
 
-		public GenericItem get(String weaponId) {
-			for (GenericItem weapon : weapons){
-				if(weapon.getId().equals(weaponId)){
-					return weapon;
+		public ArrayList<Integer> get(String weaponId){
+			ArrayList<Integer> listInt = new ArrayList<Integer>();
+
+			for(int i = 0; i< weapons.size(); i++){
+				if(weapons.get(i).getId().equals(weaponId)) {
+					listInt.add(i);
 				}
 			}
-			return null;
+			return listInt;
 		}
 
 		public void remove(int index) {
@@ -103,25 +101,18 @@ public class Inventory {
 		}
 
 		public void remove(String weaponId) {
-			for (GenericItem weapon : weapons){
-				if(weapon.getId().equals(weaponId)){
-					weapons.remove(weapon.getId());
+			for(int i = 0; i<weapons.size(); i++){
+				if(weapons.get(i).getId().equals(weaponId)) {
+					weapons.remove(i);
 					break;
 				}
 			}
 		}
 
 		public void remove(String weaponId, int amount) {
-			for(int i = 0;i<weapons.size();i++){
-				for(int j = 0;j<i;j++){
-					if(weapons.get(j).getId().equals(weaponId)) {
-						if(amount > 0){
-							weapons.remove(j);
-						}else{
-							break;
-						}
-						amount--;
-					}
+			for(int i = weapons.size() - 1; i >= 0 && amount > 0; --i, --amount){
+				if(weapons.get(i).getId().equals(weaponId)) {
+					weapons.remove(i);
 				}
 			}
 		}
@@ -144,13 +135,15 @@ public class Inventory {
 			return consumables.get(index);
 		}
 
-		public GenericItem get(String consumableId) {
-			for (GenericItem consumable : consumables){
-				if(consumable.getId().equals(consumableId)){
-					return consumable;
+		public ArrayList<Integer> get(String consumableId) {
+			ArrayList<Integer> listInt = new ArrayList<Integer>();
+
+			for(int i = 0; i< consumables.size(); i++){
+				if(consumables.get(i).getId().equals(consumableId)) {
+					listInt.add(i);
 				}
 			}
-			return null;
+			return listInt;
 		}
 
 		public void remove(int index) {
@@ -158,26 +151,25 @@ public class Inventory {
 		}
 
 		public void remove(String consumableId) {
-			for (GenericItem consumable : consumables){
-				if(consumable.getId().equals(consumableId)){
-					consumables.remove(consumable.getId());
+			for(int i = 0; i<consumables.size(); i++){
+				if(consumables.get(i).getId().equals(consumableId)) {
+					consumables.remove(i);
 					break;
 				}
 			}
 		}
 
 		public void remove(String consumableId, int amount) {
-			for(int i = 0;i<consumables.size();i++){
-				for(int j = 0;j<i;j++){
-					if(consumables.get(j).getId().equals(consumableId)) {
-						if(amount > 0){
-							consumables.remove(j);
-						}else{
-							break;
-						}
-						amount--;
-					}
+			for(int i = consumables.size() - 1; i >= 0 && amount > 0; --i, --amount){
+				if(consumables.get(i).getId().equals(consumableId)) {
+					consumables.remove(i);
 				}
+			}
+		}
+
+		public void printAll() {
+			for (GenericItem item : consumables) {
+				System.out.println(item.getName());
 			}
 		}
 	}

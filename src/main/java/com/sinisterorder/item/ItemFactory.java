@@ -14,7 +14,7 @@ public class ItemFactory {
 			case "item":
 				try {
 					FileReader reader = new FileReader("src/main/resources/item/item.json");
-					GenericItem[] items = gson.fromJson(reader, GenericItem[].class);
+					GenericItem[] items = gson.fromJson(reader, Item[].class);
 
 					for (GenericItem item : items) {
 						if(itemId.equals(item.getId())){
@@ -30,11 +30,11 @@ public class ItemFactory {
 			case "weapon":
 				try {
 					FileReader reader = new FileReader("src/main/resources/item/weapon.json");
-					GenericItem[] items = gson.fromJson(reader, GenericItem[].class);
+					GenericItem[] weapons = gson.fromJson(reader, Weapon[].class);
 
-					for (GenericItem item : items) {
-						if(itemId.equals(item.getId())){
-							return item;
+					for (GenericItem weapon : weapons) {
+						if(itemId.equals(weapon.getId())){
+							return weapon;
 						}
 					}
 					reader.close();
@@ -46,11 +46,11 @@ public class ItemFactory {
 			case "consumable":
 				try {
 					FileReader reader = new FileReader("src/main/resources/item/consumable.json");
-					GenericItem[] items = gson.fromJson(reader, GenericItem[].class);
+					GenericItem[] consumables = gson.fromJson(reader, Consumable[].class);
 
-					for (GenericItem item : items) {
-						if(itemId.equals(item.getId())){
-						return item;
+					for (GenericItem consumable : consumables) {
+						if(itemId.equals(consumable.getId())){
+						return consumable;
 					}
 				}
 					reader.close();
