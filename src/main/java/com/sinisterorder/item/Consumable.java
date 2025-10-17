@@ -1,6 +1,6 @@
 package com.sinisterorder.item;
 
-public class Consumable extends Item{
+public class Consumable extends GenericItem{
 	private String effect;
 	private int usesLeft;
 
