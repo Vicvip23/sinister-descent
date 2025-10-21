@@ -12,7 +12,10 @@ public class MenuFactory {
 	FileReader reader;
 	ChoiceMenu menu;
 
-	public ChoiceMenu create(String menuId) {
+	public ChoiceMenu create(String menuId, String menuTitle) {
+		return new ChoiceMenu(menuId, menuTitle);
+	}
+	public ChoiceMenu createFromJson(String menuId) {
 
 		try {
 			reader = new FileReader("src/main/resources/menu/" + menuId + "/root.json");
