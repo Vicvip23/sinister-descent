@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 import com.sinisterorder.handler.GenericActionHandler;
 
-public class Menu {
+public class ChoiceMenu {
 	private String menuId;
 	private String menuTitle;
 	private ArrayList<MenuOption> options = new ArrayList<MenuOption>();
+	private ArrayList<Label> labels = new ArrayList<Label>();
 
 	public String getMenuId() {
 		return menuId;
@@ -26,6 +27,18 @@ public class Menu {
 		for (MenuOption menuOption : options) {
 			if(menuOption.getOptionId().equals(optionId)) {
 				menuOption.setAction(action);
+			}
+		}
+	}
+
+	public void addLabel(String labelId, String text) {
+		labels.add(new Label(labelId, text));
+	}
+
+	public void setLabel(String labelId, String text) {
+		for (Label label : labels) {
+			if(label.getLabelId() == labelId) {
+				label.setText(text);
 			}
 		}
 	}
@@ -49,11 +62,24 @@ public class Menu {
 	}
 
 	public void display() {
-		Scanner scanner = new Scanner(System.in);
-		int input = -1;
-		boolean ranBefore = false;
+		
+		MenuUtils.clear();
 		String titleText = String.format("%s  %s  %s", "----====", this.menuTitle, "====----");
 		System.out.printf("%s\n\n", titleText);
+
+		if(labels.size() > 0) {
+			MenuUtils.separator();
+			for(int i = 0; i < options.size(); i += 2) {
+				try {
+					System.out.printf("%s\t%s", labels.get(i).getText(), labels.get(i+1).getText());
+				} catch (Exception e) {
+					System.out.printf("%s", labels.get(i).getText());
+				}
+				System.out.println();
+			}
+			MenuUtils.separator();
+			System.out.println();
+		}
 
 		for(int i = 0; i < options.size(); i += 2) {
 			try {
@@ -63,25 +89,30 @@ public class Menu {
 			}
 			System.out.println();
 		}
+		
+	}
+
+	public void run() {
+		Scanner scanner = new Scanner(System.in);
+		int input = -1;
+		boolean ranBefore = false;
+		display();
 		while (input < 0 || input >= options.size()) {
 			if(ranBefore){
+				MenuUtils.clear();
+				display();
 				System.out.println("Invalid input, try again.");
 			}
 			while(!scanner.hasNextInt()){
+				display();
 				System.out.println("Invalid input, try again.");
 				scanner.next();
 			}
 			ranBefore = true;
 			input = scanner.nextInt() - 1;
 		}
-		addAction(titleText, null);
+
 		scanner.close();
 		options.get(input).runAction();
-	}
-
-	// TODO: Remove debugging feature before merging to main
-	@Override
-	public String toString() {
-		return "Id: " + this.menuId + "; Title: " + this.menuTitle + "; Options: " + this.getOptionNames().toString();
 	}
 }
