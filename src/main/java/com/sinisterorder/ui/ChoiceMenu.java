@@ -11,6 +11,11 @@ public class ChoiceMenu {
 	private ArrayList<MenuOption> options = new ArrayList<MenuOption>();
 	private ArrayList<Label> labels = new ArrayList<Label>();
 
+	ChoiceMenu(String menuId, String menuTitle) {
+		this.menuId = menuId;
+		this.menuTitle = menuTitle;
+	}
+
 	public String getMenuId() {
 		return menuId;
 	}
