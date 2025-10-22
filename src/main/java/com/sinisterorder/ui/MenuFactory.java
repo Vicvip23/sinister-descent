@@ -19,7 +19,7 @@ public class MenuFactory {
 
 		try {
 			reader = new FileReader("src/main/resources/menu/" + menuId + "/root.json");
-			this.menu = gson.fromJson(reader, ChoiceMenu.class);
+			menu = gson.fromJson(reader, ChoiceMenu.class);
 			
 			String dirName = "src/main/resources/menu/" + menuId + "/option";
 			Files.list(Paths.get(dirName)).sorted().forEach(this::addOption);
@@ -37,7 +37,9 @@ public class MenuFactory {
 	private void addOption(Path option) {
 		try {
 			reader = new FileReader(option.toFile());
+			System.out.println(gson.fromJson(reader, MenuOption.class));
 			menu.addOption(gson.fromJson(reader, MenuOption.class));
+			System.out.println(menu.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -25,6 +25,9 @@ public class ChoiceMenu {
 	}
 
 	public void addOption(MenuOption option) {
+		if(this.options == null) {
+			this.options = new ArrayList<MenuOption>();
+		}
 		this.options.add(option);
 	}
 
@@ -74,13 +77,8 @@ public class ChoiceMenu {
 
 		if(labels.size() > 0) {
 			MenuUtils.separator();
-			for(int i = 0; i < options.size(); i += 2) {
-				try {
-					System.out.printf("%s\t%s", labels.get(i).getText(), labels.get(i+1).getText());
-				} catch (Exception e) {
-					System.out.printf("%s", labels.get(i).getText());
-				}
-				System.out.println();
+			for(Label label : labels) {
+				System.out.print(label.getText());
 			}
 			MenuUtils.separator();
 			System.out.println();
@@ -119,5 +117,9 @@ public class ChoiceMenu {
 
 		scanner.close();
 		options.get(input).runAction();
+	}
+	@Override
+	public String toString() {
+		return (menuId + " " + menuTitle + " " + options.toString());
 	}
 }
