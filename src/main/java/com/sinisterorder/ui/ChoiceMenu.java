@@ -40,6 +40,9 @@ public class ChoiceMenu {
 	}
 
 	public void addLabel(String labelId, String text) {
+		if(labels == null) {
+			labels = new ArrayList<Label>();
+		}
 		labels.add(new Label(labelId, text));
 	}
 
