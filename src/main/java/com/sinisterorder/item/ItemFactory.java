@@ -6,10 +6,10 @@ import com.google.gson.Gson;
 
 public class ItemFactory {
 	
-	Gson gson = new Gson();
+	static private Gson gson = new Gson();
 	
-	public GenericItem fromJson(String itemId, String type){
-
+	static public GenericItem fromJson(String itemId, String type){
+		
 		switch (type) {
 			case "item":
 				try {
