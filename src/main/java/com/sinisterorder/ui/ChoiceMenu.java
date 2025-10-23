@@ -10,10 +10,18 @@ public class ChoiceMenu {
 	private String menuTitle;
 	private ArrayList<MenuOption> options = new ArrayList<MenuOption>();
 	private ArrayList<Label> labels = new ArrayList<Label>();
+	static private Scanner scanner = new Scanner(System.in);
 
 	ChoiceMenu(String menuId, String menuTitle) {
 		this.menuId = menuId;
 		this.menuTitle = menuTitle;
+		this.options = new ArrayList<MenuOption>();
+		this.labels = new ArrayList<Label>();
+	}
+
+	public void initiateLists() {
+		options = new ArrayList<MenuOption>();
+		labels = new ArrayList<Label>();
 	}
 
 	public String getMenuId() {
@@ -25,6 +33,9 @@ public class ChoiceMenu {
 	}
 
 	public void addOption(MenuOption option) {
+		if(this.options == null) {
+			this.options = new ArrayList<MenuOption>();
+		}
 		this.options.add(option);
 	}
 
@@ -37,6 +48,9 @@ public class ChoiceMenu {
 	}
 
 	public void addLabel(String labelId, String text) {
+		if(labels == null) {
+			labels = new ArrayList<Label>();
+		}
 		labels.add(new Label(labelId, text));
 	}
 
@@ -74,13 +88,8 @@ public class ChoiceMenu {
 
 		if(labels.size() > 0) {
 			MenuUtils.separator();
-			for(int i = 0; i < options.size(); i += 2) {
-				try {
-					System.out.printf("%s\t%s", labels.get(i).getText(), labels.get(i+1).getText());
-				} catch (Exception e) {
-					System.out.printf("%s", labels.get(i).getText());
-				}
-				System.out.println();
+			for(Label label : labels) {
+				System.out.print(label.getText());
 			}
 			MenuUtils.separator();
 			System.out.println();
@@ -98,7 +107,6 @@ public class ChoiceMenu {
 	}
 
 	public void run() {
-		Scanner scanner = new Scanner(System.in);
 		int input = -1;
 		boolean ranBefore = false;
 		display();
@@ -117,7 +125,6 @@ public class ChoiceMenu {
 			input = scanner.nextInt() - 1;
 		}
 
-		scanner.close();
 		options.get(input).runAction();
 	}
 }

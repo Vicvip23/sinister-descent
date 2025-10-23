@@ -7,22 +7,24 @@ import java.nio.file.Paths;
 
 import com.google.gson.Gson;
 
-public class MenuFactory {
-	Gson gson = new Gson();
-	FileReader reader;
-	ChoiceMenu menu;
+public abstract class MenuFactory {
+	static private Gson gson = new Gson();
+	static private FileReader reader;
+	static private ChoiceMenu menu;
 
-	public ChoiceMenu create(String menuId, String menuTitle) {
+	static public ChoiceMenu create(String menuId, String menuTitle) {
 		return new ChoiceMenu(menuId, menuTitle);
 	}
-	public ChoiceMenu createFromJson(String menuId) {
+	
+	static public ChoiceMenu createFromJson(String menuId) {
 
 		try {
 			reader = new FileReader("src/main/resources/menu/" + menuId + "/root.json");
-			this.menu = gson.fromJson(reader, ChoiceMenu.class);
+			menu = gson.fromJson(reader, ChoiceMenu.class);
+			menu.initiateLists();
 			
 			String dirName = "src/main/resources/menu/" + menuId + "/option";
-			Files.list(Paths.get(dirName)).sorted().forEach(this::addOption);
+			Files.list(Paths.get(dirName)).sorted().forEach(MenuFactory::addOption);
 
 			reader.close();
 
@@ -34,7 +36,7 @@ public class MenuFactory {
 		}
 	}
 
-	private void addOption(Path option) {
+	static private void addOption(Path option) {
 		try {
 			reader = new FileReader(option.toFile());
 			menu.addOption(gson.fromJson(reader, MenuOption.class));
