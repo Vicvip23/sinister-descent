@@ -9,11 +9,13 @@ public class Inventory {
 	public ItemManager itemManager;
 	public WeaponManager weaponManager;
 	public ConsumableManager consumableManager;
+	public PurseManager purseManager;
 
 	public Inventory() {
 		this.itemManager = new ItemManager();
 		this.weaponManager = new WeaponManager();
 		this.consumableManager = new ConsumableManager();
+		this.purseManager = new PurseManager();
 	}
 
 
@@ -169,6 +171,30 @@ public class Inventory {
 			for (GenericItem item : consumables) {
 				System.out.println(item.getName());
 			}
+		}
+	}
+
+	public class PurseManager {
+		private int money;
+
+		PurseManager() {
+			money = 0;
+		}
+
+		public void addMoney(int amnt) {
+			money += amnt;
+		}
+
+		public void removeMoney(int amnt) {
+			money -= amnt;
+		}
+
+		public void setMoney(int amnt) {
+			money = amnt;
+		}
+
+		public int getMoney() {
+			return money;
 		}
 	}
 }
