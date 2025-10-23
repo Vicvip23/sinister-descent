@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import com.google.gson.Gson;
 
-public class MenuFactory {
+public abstract class MenuFactory {
 	static private Gson gson = new Gson();
 	static private FileReader reader;
 	static private ChoiceMenu menu;
