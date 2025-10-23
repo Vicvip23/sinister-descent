@@ -10,10 +10,18 @@ public class ChoiceMenu {
 	private String menuTitle;
 	private ArrayList<MenuOption> options = new ArrayList<MenuOption>();
 	private ArrayList<Label> labels = new ArrayList<Label>();
+	static private Scanner scanner = new Scanner(System.in);
 
 	ChoiceMenu(String menuId, String menuTitle) {
 		this.menuId = menuId;
 		this.menuTitle = menuTitle;
+		this.options = new ArrayList<MenuOption>();
+		this.labels = new ArrayList<Label>();
+	}
+
+	public void initiateLists() {
+		options = new ArrayList<MenuOption>();
+		labels = new ArrayList<Label>();
 	}
 
 	public String getMenuId() {
@@ -99,7 +107,6 @@ public class ChoiceMenu {
 	}
 
 	public void run() {
-		Scanner scanner = new Scanner(System.in);
 		int input = -1;
 		boolean ranBefore = false;
 		display();
@@ -118,11 +125,6 @@ public class ChoiceMenu {
 			input = scanner.nextInt() - 1;
 		}
 
-		scanner.close();
 		options.get(input).runAction();
-	}
-	@Override
-	public String toString() {
-		return (menuId + " " + menuTitle + " " + options.toString());
 	}
 }
