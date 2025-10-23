@@ -11,5 +11,29 @@ import com.sinisterorder.ui.*;
 public class App {
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
+		ChoiceMenu menu = MenuFactory.createFromJson("examplemenu");
+		ChoiceMenu menu2 = MenuFactory.createFromJson("examplemenu2");
+		System.out.println(menu);
+		menu.addAction("example1", () -> {
+			System.out.println("example one");
+			menu.setLabel("label_art", "aaa\n");
+			System.out.println("ert");
+			menu.run();
+		});
+		menu2.addAction("example1", () -> {
+			System.out.println("here");
+		});
+		menu2.addAction("example2", () -> {
+			menu.run();
+		});
+		menu.addAction("example2", () -> {
+			menu2.run();
+		});
+		menu.addLabel("label_art", """
+		abcsdsdsdssd
+		fsdsfsdf
+		i hate people
+		""");
+		menu.run();
 	}
 }
