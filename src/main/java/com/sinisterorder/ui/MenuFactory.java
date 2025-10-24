@@ -21,7 +21,7 @@ public abstract class MenuFactory {
 		try {
 			reader = new FileReader("src/main/resources/menu/" + menuId + "/root.json");
 			menu = gson.fromJson(reader, ChoiceMenu.class);
-			menu.initiateLists();
+			menu.initializeLists();
 			
 			String dirName = "src/main/resources/menu/" + menuId + "/option";
 			Files.list(Paths.get(dirName)).sorted().forEach(MenuFactory::addOption);
