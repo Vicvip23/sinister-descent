@@ -72,6 +72,7 @@ public class Inventory {
 	public class WeaponManager implements InventoryManagerInterface {
 
 		private ArrayList<GenericItem> weapons = new ArrayList<GenericItem>();
+		private Weapon equippedWeapon;
 
 		public ArrayList<GenericItem> list() {
 			return weapons;
@@ -117,6 +118,13 @@ public class Inventory {
 			}
 		}
 
+		public void equip(int weaponIndex) {
+			equippedWeapon = (Weapon) weapons.get(weaponIndex);
+		}
+
+		public Weapon getEquippedWeapon() {
+			return equippedWeapon;
+		}
 	}
 
 	public class ConsumableManager implements InventoryManagerInterface {

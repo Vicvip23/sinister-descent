@@ -24,6 +24,12 @@ public class ChoiceMenu {
 		labels = new ArrayList<Label>();
 	}
 
+	public void wipe() {
+		menuTitle = "";
+		options.clear();
+		labels.clear();
+	}
+
 	public String getMenuId() {
 		return menuId;
 	}
@@ -32,11 +38,19 @@ public class ChoiceMenu {
 		return menuTitle;
 	}
 
-	public void addOption(MenuOption option) {
+	public void setTitle(String menuTitle) {
+		this.menuTitle = menuTitle;
+	}
+
+	protected void addOption(MenuOption option) {
 		if(this.options == null) {
 			this.options = new ArrayList<MenuOption>();
 		}
 		this.options.add(option);
+	}
+
+	public void createOption(String optionId, String optionName, GenericActionHandler action) {
+		this.options.add(new MenuOption(optionId, optionName, action));
 	}
 
 	public void addAction(String optionId, GenericActionHandler action) {
