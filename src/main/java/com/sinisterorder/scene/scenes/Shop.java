@@ -25,7 +25,7 @@ public class Shop extends Scene{
 		this.client = client;
 	}
 
-	public void run(Scene nextScene) {
+	public void run() {
 		run = true;
 
 		generateInventory();
@@ -33,8 +33,6 @@ public class Shop extends Scene{
 			buildMenu();
 			shopMenu.run();
 		}
-
-		nextScene.run();
 	}
 
 	private void generateInventory() {
@@ -166,7 +164,7 @@ public class Shop extends Scene{
 			client.startInventoryManagerUi(true);
 		});
 
-		shopMenu.createOption("continue", "\033[0;1mDescend.", () -> {
+		shopMenu.createOption("continue", "\033[0;1mDescend.\033[0;0m", () -> {
 			run = false;
 		});
 	}

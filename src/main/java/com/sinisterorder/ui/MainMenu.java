@@ -1,13 +1,9 @@
 package com.sinisterorder.ui;
 
-import com.sinisterorder.scene.Scene;
-
 public class MainMenu {
 	private static ChoiceMenu menu;
-	private static Scene toRun;
 
-	public static void run(Scene proceedingScene) {
-		toRun = proceedingScene;
+	public static void run() {
 		MenuUtils.openingPoem();
 		buildMenu();
 		menu.run();
@@ -18,9 +14,7 @@ public class MainMenu {
 
 		menu.addLabel("title", MenuUtils.titleText);
 
-		menu.addAction("start", () -> {
-			toRun.run();
-		});
+		menu.addAction("start", () -> {});
 
 		menu.addAction("exit", () -> {
 			System.out.println("See you next time.");

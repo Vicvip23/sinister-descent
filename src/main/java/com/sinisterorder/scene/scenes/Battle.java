@@ -19,7 +19,9 @@ public class Battle extends Scene{
 	private boolean run;
 	private static Random random = new Random();
 
-	public void run(Player player, Entity enemy, Scene nextScene) {
+	public void run(Player player, Entity enemy) {
+		this.player = player;
+		this.enemy = enemy;
 		run = true;
 
 		while (run) {
@@ -27,8 +29,6 @@ public class Battle extends Scene{
 			battleMenu.run();
 			turn();
 		}
-
-		nextScene.run();
 	};
 
 	private void buildMenu() {
@@ -39,11 +39,17 @@ public class Battle extends Scene{
 		battleMenu.createOption("attack", "Attack", () -> {
 			ArrayList<Attack> availableAttacks = new ArrayList<>();
 
-			for (String attackId : AttacksetFactory.fromJson(player.inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
-				availableAttacks.add(AttackFactory.fromJson(attackId));
-			}
-			for (String attackId : player.inventory.weaponManager.getEquippedWeapon().getUniqueAttacks()) {
-				availableAttacks.add(AttackFactory.fromJson(attackId));	
+			if(player.inventory.weaponManager.getEquippedWeapon() != null) {
+				for (String attackId : AttacksetFactory.fromJson(player.inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
+					availableAttacks.add(AttackFactory.fromJson(attackId));
+				}
+				for (String attackId : player.inventory.weaponManager.getEquippedWeapon().getUniqueAttacks()) {
+					availableAttacks.add(AttackFactory.fromJson(attackId));	
+				}
+			} else {
+				player.inventory.weaponManager.add("fist");
+				player.inventory.weaponManager.equip(0);
+				availableAttacks.add(AttackFactory.fromJson("punch"));
 			}
 
 			battleMenu.createQuery("attack_selector", "Pick attack to use: ", "free", 0, availableAttacks.size() - 1);

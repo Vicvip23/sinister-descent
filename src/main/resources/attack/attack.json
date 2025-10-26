@@ -4,5 +4,11 @@
 		"attackName": "Swing",
 		"attackDescription": "Swing your weapon at your opponent. Not much to it.",
 		"attackMultiplier": 1.1
+	},
+	{
+		"attackId": "punch",
+		"attackName": "Punch",
+		"attackDescription": "Punch your opponent. Ouch.",
+		"attackMultiplier": 0.8
 	}
 ]

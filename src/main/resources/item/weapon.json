@@ -1,5 +1,15 @@
 [
 	{
+		"itemId": "fist",
+		"itemName": "Fist",
+		"sellValue": 0,
+		"description": "Your fist.",
+		"level": 1,
+		"damage": 1,
+		"attackset": "",
+		"uniqueAttacks": ["punch"]
+	},
+	{
 		"itemId": "test_weapon",
 		"itemName": "Developer Sword",
 		"sellValue": 30,

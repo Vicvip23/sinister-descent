@@ -24,6 +24,10 @@ public abstract class Entity implements EntityDamageHandler{
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getMaxHealth() {
 		return maxHealth;
 	}
