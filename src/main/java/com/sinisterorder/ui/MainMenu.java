@@ -10,6 +10,7 @@ public class MainMenu {
 		toRun = proceedingScene;
 		MenuUtils.openingPoem();
 		buildMenu();
+		menu.run();
 	}
 
 	private static void buildMenu() {

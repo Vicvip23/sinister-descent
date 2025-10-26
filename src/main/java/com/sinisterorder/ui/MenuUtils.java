@@ -49,22 +49,22 @@ public class MenuUtils {
 
 	static protected void openingPoem() {
 		clear();
-		printWithDelay("Legends of old\\n", 100);
+		printWithDelay("Legends of old\n", 100);
 		wait(250);
-		printWithDelay("Have mentions untold,\\n", 100);
+		printWithDelay("Have mentions untold,\n", 100);
 		wait(250);
-		printWithDelay("Of treasures that lay\\n", 100);
+		printWithDelay("Of treasures that lay\n", 100);
 		wait(250);
-		printWithDelay("in deep dark's embrace.\\n\\n", 100);
+		printWithDelay("in deep dark's embrace.\n\n", 100);
 		wait(400);
-		printWithDelay("Those who set out\\n", 100);
+		printWithDelay("Those who set out\n", 100);
 		wait(250);
-		printWithDelay("To claim that fate whole,\\n", 100);
+		printWithDelay("To claim that fate whole,\n", 100);
 		wait(250);
-		printWithDelay("Must face their own\\n", 100);
+		printWithDelay("Must face their own\n", 100);
 		wait(400);
 		clear();
-		printWithDelay("\\033[0;1mSinister Descent.\\033[0;0m", 150);
+		printWithDelay("\033[0;1mSinister Descent.\033[0;0m", 150);
 		wait(250);
 	};
 }
