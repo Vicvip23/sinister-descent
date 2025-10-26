@@ -114,7 +114,7 @@ public class Player extends Entity{
 						playerMenu.createQuery("item_selector", "Input which weapon you'd like to sell", "free", 0, inventory.weaponManager.list().size() - 1);
 						int selectedItem = playerMenu.query.run();
 
-						this.inventory.purseManager.addMoney(this.inventory.weaponManager.get(selectedItem).getValue());
+						this.inventory.purseManager.addMoney(this.inventory.weaponManager.get(selectedItem).getValue() / 2);
 						this.inventory.weaponManager.remove(selectedItem);
 					});
 				}
@@ -168,7 +168,7 @@ public class Player extends Entity{
 						playerMenu.createQuery("item_selector", "Input which item you'd like to sell", "free", 0, inventory.itemManager.list().size() - 1);
 						int selectedItem = playerMenu.query.run();
 
-						this.inventory.purseManager.addMoney(this.inventory.itemManager.get(selectedItem).getValue());
+						this.inventory.purseManager.addMoney(this.inventory.itemManager.get(selectedItem).getValue() / 2);
 						this.inventory.itemManager.remove(selectedItem);
 					});
 				}
@@ -230,7 +230,7 @@ public class Player extends Entity{
 						playerMenu.createQuery("item_selector", "Input which consumable you'd like to sell", "free", 0, inventory.consumableManager.list().size() - 1);
 						int selectedItem = playerMenu.query.run();
 
-						this.inventory.purseManager.addMoney(this.inventory.consumableManager.get(selectedItem).getValue());
+						this.inventory.purseManager.addMoney(this.inventory.consumableManager.get(selectedItem).getValue() / 2);
 						this.inventory.consumableManager.remove(selectedItem);
 					});
 				}

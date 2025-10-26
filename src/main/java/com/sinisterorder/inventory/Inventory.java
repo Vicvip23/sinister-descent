@@ -18,6 +18,12 @@ public class Inventory {
 		this.purseManager = new PurseManager();
 	}
 
+	public void wipe() {
+		itemManager.items.clear();
+		weaponManager.weapons.clear();
+		weaponManager.equippedWeapon = null;
+		consumableManager.consumables.clear();
+	}
 
 	public class ItemManager implements InventoryManagerInterface {
 
@@ -80,6 +86,10 @@ public class Inventory {
 
 		public void add(String weaponId) {
 			weapons.add(ItemFactory.fromJson(weaponId,"weapon"));
+		}
+
+		public void add(Weapon weapon) {
+			weapons.add(weapon);
 		}
 
 		public Weapon get(int index) {
@@ -152,6 +162,10 @@ public class Inventory {
 
 		public void add(String consumableId) {
 			consumables.add(ItemFactory.fromJson(consumableId,"consumable"));
+		}
+
+		public void add(Consumable consumable) {
+			consumables.add(consumable);
 		}
 
 		public Consumable get(int index) {

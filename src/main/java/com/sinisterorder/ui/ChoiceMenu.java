@@ -107,7 +107,7 @@ public class ChoiceMenu {
 		}
 	}
 
-	public void display() {
+	private void display() {
 		
 		MenuUtils.clear();
 		String titleText = String.format("%s  %s  %s", "----====", this.menuTitle, "====----");
