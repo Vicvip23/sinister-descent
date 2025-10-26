@@ -25,7 +25,7 @@ public class Shop extends Scene{
 		this.client = client;
 	}
 
-	public void run() {
+	public void run(Scene nextScene) {
 		run = true;
 
 		generateInventory();
@@ -33,6 +33,8 @@ public class Shop extends Scene{
 			buildMenu();
 			shopMenu.run();
 		}
+
+		nextScene.run();
 	}
 
 	private void generateInventory() {

@@ -5,9 +5,9 @@ import java.io.FileReader;
 import com.google.gson.Gson;
 
 public class AttackFactory {
-    Gson gson = new Gson();
+    static Gson gson = new Gson();
 
-    public Attack fromJson(String attackId){
+    public static Attack fromJson(String attackId){
 
 
         try {
