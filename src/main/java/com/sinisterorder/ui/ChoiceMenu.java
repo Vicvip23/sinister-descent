@@ -10,6 +10,7 @@ public class ChoiceMenu {
 	private String menuTitle;
 	private ArrayList<MenuOption> options = new ArrayList<MenuOption>();
 	private ArrayList<Label> labels = new ArrayList<Label>();
+	public Query query;
 	static private Scanner scanner = new Scanner(System.in);
 
 	ChoiceMenu(String menuId, String menuTitle) {
@@ -126,5 +127,165 @@ public class ChoiceMenu {
 		}
 
 		options.get(input).runAction();
+	}
+
+	public void createQuery(String queryId, String queryTitle, String inputMode, int inputRangeStart, int inputRangeEnd) {
+		this.query = new Query(queryId, queryTitle, inputMode, inputRangeStart, inputRangeEnd);
+	}
+
+	public void createQuery(String queryId, String queryTitle, String inputMode) {
+		try {
+			this.query = new Query(queryId, queryTitle, inputMode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public class Query {
+		private String queryId;
+		private String queryTitle;
+		private String inputMode;
+		private int[] inputRange;
+		private ArrayList<MenuOption> suboptions = new ArrayList<MenuOption>();
+
+		Query(String queryId, String queryTitle, String inputMode) throws Exception {
+			this.queryId = queryId;
+			this.queryTitle = queryTitle;
+			this.inputMode = inputMode;
+			this.suboptions = new ArrayList<MenuOption>();
+
+			if(inputMode == "free") {
+				Exception exception = new Exception("Input mode \"free\" specified yet no range values were given");
+				throw exception;
+			}
+		}
+		
+		Query(String queryId, String queryTitle, String inputMode, int inputRangeStart, int inputRangeEnd) {
+			this.queryId = queryId;
+			this.queryTitle = queryTitle;
+			this.inputMode = inputMode;
+			this.suboptions = new ArrayList<MenuOption>();
+
+			if(inputMode == "free") {
+				inputRange = new int[2];
+				inputRange[0] = inputRangeStart;
+				inputRange[1] = inputRangeEnd;
+			}
+		}
+
+		protected void initializeLists() {
+			options = new ArrayList<MenuOption>();
+		}
+
+		public String getQueryId() {
+			return queryId;
+		}
+
+		public String getQueryitle() {
+			return queryTitle;
+		}
+
+		protected void addOption(MenuOption option) {
+			if(this.suboptions == null) {
+				this.suboptions = new ArrayList<MenuOption>();
+			}
+
+			this.suboptions.add(option);
+		}
+
+		public void addAction(String optionId, GenericActionHandler action) {
+			for (MenuOption menuOption : suboptions) {
+				if(menuOption.getOptionId().equals(optionId)) {
+					menuOption.setAction(action);
+				}
+			}
+		}
+
+		public ArrayList<String> getOptionNames() {
+			ArrayList<String> output = new ArrayList<String>();
+			
+			for(int i = 0; i < suboptions.size(); i++) {
+				output.add(suboptions.get(i).getName());
+			}
+
+			return output;
+		}
+
+		public void runOption(String optionId) {
+			for (MenuOption option : suboptions) {
+				if(option.getOptionId().equals(optionId)) {
+					option.runAction();
+				}
+			}
+		}
+
+		private void displayOptionMode() {
+			
+			String titleText = String.format("%s  %s  %s", "--==", this.queryTitle, "==--");
+			System.out.printf("%s\n\n", titleText);
+
+			for(int i = 0; i < suboptions.size(); i += 2) {
+				try {
+					System.out.printf("%d) %s\t%d) %s", i + 1, suboptions.get(i).getName(), i + 2, suboptions.get(i+1).getName());
+				} catch (Exception e) {
+					System.out.printf("%d) %s", i + 1, suboptions.get(i).getName());
+				}
+				System.out.println();
+			}
+		}
+
+		private void displayFreeMode() {
+			String query = String.format("%s: ", this.queryTitle);
+			System.out.println();
+			System.out.print(query);
+		}
+
+		public int run() {
+			int input = -1;
+			boolean ranBefore = false;
+			
+			if(inputMode.equals("free")) {
+				displayFreeMode();
+				while (input > inputRange[1] || input < inputRange[0]) {
+					if(ranBefore){
+						MenuUtils.clear();
+						display();
+						displayFreeMode();
+						System.out.println("Invalid input, try again.");
+					}
+					while(!scanner.hasNextInt()){
+						MenuUtils.clear();
+						display();
+						System.out.println();
+						System.out.println("Invalid input, try again.");
+						displayFreeMode();
+						scanner.next();
+					}
+					ranBefore = true;
+					input = scanner.nextInt() - 1;
+				}
+				
+				return input;
+			} else {
+				displayOptionMode();
+				while (input < 0 || input >= options.size()) {
+					if(ranBefore){
+						display();
+						displayOptionMode();
+						System.out.println("Invalid input, try again.");
+					}
+					while(!scanner.hasNextInt()){
+						displayOptionMode();
+						System.out.println("Invalid input, try again.");
+						scanner.next();
+					}
+					ranBefore = true;
+					input = scanner.nextInt() - 1;
+				}
+
+				suboptions.get(input).runAction();
+				return 0;
+			}
+		}
 	}
 }
