@@ -9,13 +9,13 @@ public class Inventory {
 	public ItemManager itemManager;
 	public WeaponManager weaponManager;
 	public ConsumableManager consumableManager;
-	public ItemFactory itemFactory;
+	public PurseManager purseManager;
 
 	public Inventory() {
 		this.itemManager = new ItemManager();
 		this.weaponManager = new WeaponManager();
 		this.consumableManager = new ConsumableManager();
-		this.itemFactory = new ItemFactory();
+		this.purseManager = new PurseManager();
 	}
 
 
@@ -28,7 +28,7 @@ public class Inventory {
 		}
 
 		public void add(String itemId) {
-			items.add(itemFactory.fromJson(itemId,"item"));
+			items.add(ItemFactory.fromJson(itemId,"item"));
 		}
 
 		public GenericItem get(int index) {
@@ -78,7 +78,7 @@ public class Inventory {
 		}
 
 		public void add(String weaponId) {
-			weapons.add(itemFactory.fromJson(weaponId,"weapon"));
+			weapons.add(ItemFactory.fromJson(weaponId,"weapon"));
 		}
 
 		public GenericItem get(int index) {
@@ -128,7 +128,7 @@ public class Inventory {
 		}
 
 		public void add(String consumableId) {
-			consumables.add(itemFactory.fromJson(consumableId,"consumable"));
+			consumables.add(ItemFactory.fromJson(consumableId,"consumable"));
 		}
 
 		public GenericItem get(int index) {
@@ -171,6 +171,30 @@ public class Inventory {
 			for (GenericItem item : consumables) {
 				System.out.println(item.getName());
 			}
+		}
+	}
+
+	public class PurseManager {
+		private int money;
+
+		PurseManager() {
+			money = 0;
+		}
+
+		public void addMoney(int amnt) {
+			money += amnt;
+		}
+
+		public void removeMoney(int amnt) {
+			money -= amnt;
+		}
+
+		public void setMoney(int amnt) {
+			money = amnt;
+		}
+
+		public int getMoney() {
+			return money;
 		}
 	}
 }

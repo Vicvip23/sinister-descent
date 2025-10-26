@@ -19,7 +19,7 @@ public class ChoiceMenu {
 		this.labels = new ArrayList<Label>();
 	}
 
-	public void initiateLists() {
+	protected void initializeLists() {
 		options = new ArrayList<MenuOption>();
 		labels = new ArrayList<Label>();
 	}
