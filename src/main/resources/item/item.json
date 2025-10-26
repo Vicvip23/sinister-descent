@@ -1,0 +1,9 @@
+[
+	{
+		"itemId": "test_item",
+		"itemName": "Developer Item",
+		"sellValue": 30,
+		"description": "This is a test item. If you are seeing this, something must've went very wrong! Or you looked for it. Good job.",
+		"level": 100
+	}
+]

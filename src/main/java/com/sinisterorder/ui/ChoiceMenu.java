@@ -25,10 +25,22 @@ public class ChoiceMenu {
 		labels = new ArrayList<Label>();
 	}
 
-	public void wipe() {
+	public void fullWipe() {
 		menuTitle = "";
 		options.clear();
 		labels.clear();
+	}
+
+	public void wipeLabels() {
+		labels.clear();
+	}
+
+	public void wipeOptions() {
+		options.clear();
+	}
+
+	public void deleteQuery() {
+		query = null;
 	}
 
 	public String getMenuId() {
@@ -99,7 +111,7 @@ public class ChoiceMenu {
 		
 		MenuUtils.clear();
 		String titleText = String.format("%s  %s  %s", "----====", this.menuTitle, "====----");
-		System.out.printf("%s\n\n", titleText);
+		System.out.printf("%s\n", titleText);
 
 		if(labels.size() > 0) {
 			MenuUtils.separator();
@@ -264,8 +276,9 @@ public class ChoiceMenu {
 					if(ranBefore){
 						MenuUtils.clear();
 						display();
-						displayFreeMode();
+						System.out.println();
 						System.out.println("Invalid input, try again.");
+						displayFreeMode();
 					}
 					while(!scanner.hasNextInt()){
 						MenuUtils.clear();

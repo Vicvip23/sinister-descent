@@ -31,8 +31,8 @@ public class Inventory {
 			items.add(ItemFactory.fromJson(itemId,"item"));
 		}
 
-		public GenericItem get(int index) {
-			return items.get(index);
+		public Item get(int index) {
+			return (Item) items.get(index);
 		}
 		public ArrayList<Integer> get(String itemId){
 			ArrayList<Integer> listInt = new ArrayList<Integer>();
@@ -82,8 +82,8 @@ public class Inventory {
 			weapons.add(ItemFactory.fromJson(weaponId,"weapon"));
 		}
 
-		public GenericItem get(int index) {
-			return weapons.get(index);
+		public Weapon get(int index) {
+			return (Weapon) weapons.get(index);
 		}
 
 		public ArrayList<Integer> get(String weaponId){
@@ -120,8 +120,15 @@ public class Inventory {
 
 		public void equip(int weaponIndex) {
 			equippedWeapon = (Weapon) weapons.get(weaponIndex);
+			weapons.remove(weaponIndex);
 		}
 
+		public void unequip() {
+			if(equippedWeapon != null) {
+				weapons.add(equippedWeapon);
+				equippedWeapon = null;
+			}
+		}
 		public Weapon getEquippedWeapon() {
 			return equippedWeapon;
 		}
@@ -135,12 +142,20 @@ public class Inventory {
 			return consumables;
 		}
 
+		public void use(int index) {
+			Consumable temp = (Consumable) consumables.get(index);
+			temp.use();
+			if(temp.getUses() == 0) {
+				consumables.remove(index);
+			}
+		}
+
 		public void add(String consumableId) {
 			consumables.add(ItemFactory.fromJson(consumableId,"consumable"));
 		}
 
-		public GenericItem get(int index) {
-			return consumables.get(index);
+		public Consumable get(int index) {
+			return (Consumable) consumables.get(index);
 		}
 
 		public ArrayList<Integer> get(String consumableId) {
