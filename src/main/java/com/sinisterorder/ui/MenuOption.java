@@ -7,6 +7,12 @@ public class MenuOption {
 	private String optionName;
 	private GenericActionHandler action;
 
+	protected MenuOption(String optionId, String optionName, GenericActionHandler action) {
+		this.optionId = optionId;
+		this.optionName = optionName;
+		this.action = action;
+	}
+
 	public String getOptionId() {
 		return optionId;
 	}

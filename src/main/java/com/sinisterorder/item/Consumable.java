@@ -1,19 +1,24 @@
 package com.sinisterorder.item;
 
 public class Consumable extends GenericItem{
-	private String effect;
+	private String effectId;
+	private String effectDescription;
 	private int usesLeft;
 
-	public String getEffect() {
-		return this.effect;
+	public String getEffectId() {
+		return effectId;
 	}
 
 	public int getUses() {
-		return this.usesLeft;
+		return usesLeft;
 	}
 
 	public String use() {
 		this.usesLeft--;
-		return this.effect;
+		return effectId;
+	}
+
+	public String getEffectDescription() {
+		return effectDescription;
 	}
 }

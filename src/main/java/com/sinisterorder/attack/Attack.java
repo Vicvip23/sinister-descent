@@ -1,10 +1,10 @@
 package com.sinisterorder.attack;
 
 public class Attack{
-      private  String attackId;
-      private  String attackName;
-      private  String attackDesscripotion;
-      private  float attackMultiplayer;
+      private String attackId;
+      private String attackName;
+      private String attackDescription;
+      private float attackMultiplier;
 
     public String getAttackId() {
         return this.attackId;
@@ -14,12 +14,12 @@ public class Attack{
         return this.attackName;
     }
 
-    public String getAttackDesscripotion() {
-        return this.attackDesscripotion;
+    public String getAttackDescription() {
+        return this.attackDescription;
     }
 
-    public float getAttackMultiplayer() {
-        return this.attackMultiplayer;
+    public float getAttackMultiplier() {
+        return this.attackMultiplier;
     }
 
     public void setAttackId(String attackId) {
@@ -30,11 +30,11 @@ public class Attack{
         this.attackName = attackName;
     }
 
-    public void setAttackDesscripotion(String attackDesscripotion) {
-        this.attackDesscripotion = attackDesscripotion;
+    public void setAttackDescription(String attackDescription) {
+        this.attackDescription = attackDescription;
     }
 
-    public void setAttackMultiplayer(float attackMultiplayer) {
-        this.attackMultiplayer = attackMultiplayer;
+    public void setAttackMultiplayer(float attackMultiplier) {
+        this.attackMultiplier = attackMultiplier;
     }
 }

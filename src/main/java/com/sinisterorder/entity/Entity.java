@@ -1,5 +1,6 @@
 package com.sinisterorder.entity;
 
+import com.sinisterorder.attack.Attack;
 import com.sinisterorder.handler.EntityDamageHandler;
 import com.sinisterorder.inventory.Inventory;
 
@@ -69,5 +70,9 @@ public abstract class Entity implements EntityDamageHandler{
 		if(health < 0) {
 			health = 0;
 		}
+	}
+
+	public void attack(Entity target, Attack attack) {
+		target.removeHealth((int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.armor / 2));
 	}
 }
