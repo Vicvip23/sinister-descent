@@ -1,1 +1,8 @@
-
+[
+	{
+		"attackId": "swing",
+		"attackName": "Swing",
+		"attackDescription": "Swing your weapon at your opponent. Not much to it.",
+		"attackMultiplier": 1.1
+	}
+]

@@ -8,5 +8,15 @@
 		"effectId": "heal",
 		"effectDescription": "Heals the user.",
 		"usesLeft": 10
+	},
+	{
+		"itemId": "small_health_potion",
+		"itemName": "Small Health Potion",
+		"sellValue": 30,
+		"description": "For minor wounds and scratches.",
+		"level": 2,
+		"effectId": "heal",
+		"effectDescription": "Heals the user.",
+		"usesLeft": 10
 	}
 ]

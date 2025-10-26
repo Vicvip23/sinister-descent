@@ -8,5 +8,15 @@
 		"damage": 9999,
 		"attackset": "sword",
 		"uniqueAttacks": []
+	},
+	{
+		"itemId": "wooden_stick",
+		"itemName": "Wooden Stick",
+		"sellValue": 2,
+		"description": "Not the best weapon, but beats using your fists.",
+		"level": 1,
+		"damage": 2,
+		"attackset": "sword",
+		"uniqueAttacks": []
 	}
 ]
