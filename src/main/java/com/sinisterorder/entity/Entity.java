@@ -76,7 +76,5 @@ public abstract class Entity implements EntityDamageHandler{
 		}
 	}
 
-	public void attack(Entity target, Attack attack) {
-		target.removeHealth((int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.armor / 2));
-	}
+	public abstract void attack(Entity target);
 }

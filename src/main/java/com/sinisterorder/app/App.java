@@ -38,8 +38,8 @@ public class App {
 		
 		shop.run();
 		Entity enemy = new Npc();
-		enemy.setHealth(20);
 		enemy.setMaxHealth(20);
+		enemy.setHealth(20);
 		enemy.setArmor(1);
 		enemy.setName("Test Wolf");
 		enemy.inventory.weaponManager.add("wooden_stick");

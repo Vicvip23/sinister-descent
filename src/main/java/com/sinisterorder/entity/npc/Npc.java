@@ -7,4 +7,9 @@ public class Npc extends Entity{
 		createInventory();
 	}
 	// TODO: implement Npc (enemy)
+	@Override
+	public void attack(Entity target) {
+		// TODO Auto-generated method stub
+		
+	}
 }

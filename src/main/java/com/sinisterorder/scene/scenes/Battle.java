@@ -37,38 +37,7 @@ public class Battle extends Scene{
 		battleMenu.addLabel("battle_info", String.format("%s: %d\t %s: %d\n", "Health", enemy.getHealth(), "Armor", enemy.getArmor()));
 
 		battleMenu.createOption("attack", "Attack", () -> {
-			ArrayList<Attack> availableAttacks = new ArrayList<>();
-
-			if(player.inventory.weaponManager.getEquippedWeapon() != null) {
-				for (String attackId : AttacksetFactory.fromJson(player.inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
-					availableAttacks.add(AttackFactory.fromJson(attackId));
-				}
-				for (String attackId : player.inventory.weaponManager.getEquippedWeapon().getUniqueAttacks()) {
-					availableAttacks.add(AttackFactory.fromJson(attackId));	
-				}
-			} else {
-				player.inventory.weaponManager.add("fist");
-				player.inventory.weaponManager.equip(0);
-				availableAttacks.add(AttackFactory.fromJson("punch"));
-			}
-
-			battleMenu.createQuery("attack_selector", "Pick attack to use: ", "free", 0, availableAttacks.size() - 1);
-
-			battleMenu.fullWipe();
-			battleMenu.setTitle("Attacks");
-
-			for (int i = 1; i <= availableAttacks.size(); ++i) {
-				if(i % 3 == 0 && i != availableAttacks.size()) {
-					battleMenu.addLabel("" + i, String.format("%d. %s\n", i, availableAttacks.get(i - 1).getAttackName()));
-				} else {
-					battleMenu.addLabel("" + i, String.format("%d. %s\t", i, availableAttacks.get(i - 1).getAttackName()));
-				}
-			}
-
-			battleMenu.createOption("pick_attack", "Choose attack", () -> {
-				player.attack(enemy, availableAttacks.get(battleMenu.query.run()));
-			});
-			battleMenu.run();
+			player.attack(enemy);
 		});
 
 		battleMenu.createOption("inventory", "Open inventory", () -> {
@@ -86,6 +55,6 @@ public class Battle extends Scene{
 			availableAttacks.add(AttackFactory.fromJson(attackId));	
 		}
 
-		enemy.attack(player, availableAttacks.get(random.nextInt(availableAttacks.size())));
+		enemy.attack(player);
 	}
 }

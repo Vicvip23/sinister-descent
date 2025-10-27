@@ -1,5 +1,10 @@
 package com.sinisterorder.entity.player;
 
+import java.util.ArrayList;
+
+import com.sinisterorder.attack.Attack;
+import com.sinisterorder.attack.AttackFactory;
+import com.sinisterorder.attack.AttacksetFactory;
 import com.sinisterorder.entity.Entity;
 import com.sinisterorder.ui.ChoiceMenu;
 import com.sinisterorder.ui.MenuFactory;
@@ -243,5 +248,41 @@ public class Player extends Entity{
 			playerMenu.run();
 			playerMenu.fullWipe();
 		}
+	}
+
+	@Override
+	public void attack(Entity target) {
+		ArrayList<Attack> availableAttacks = new ArrayList<>();
+
+		if(inventory.weaponManager.getEquippedWeapon() != null) {
+			for (String attackId : AttacksetFactory.fromJson(inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
+				availableAttacks.add(AttackFactory.fromJson(attackId));
+			}
+			for (String attackId : inventory.weaponManager.getEquippedWeapon().getUniqueAttacks()) {
+				availableAttacks.add(AttackFactory.fromJson(attackId));	
+			}
+		} else {
+			inventory.weaponManager.add("fist");
+			inventory.weaponManager.equip(0);
+			availableAttacks.add(AttackFactory.fromJson("punch"));
+		}
+
+		playerMenu.createQuery("attack_selector", "Pick attack to use", "free", 0, availableAttacks.size() - 1);
+
+		playerMenu.fullWipe();
+		playerMenu.setTitle("Attacks");
+
+		for (int i = 1; i <= availableAttacks.size(); ++i) {
+			if(i % 3 == 0 && i != availableAttacks.size()) {
+				playerMenu.addLabel("" + i, String.format("%d. %s\n", i, availableAttacks.get(i - 1).getAttackName()));
+			} else {
+				playerMenu.addLabel("" + i, String.format("%d. %s\t", i, availableAttacks.get(i - 1).getAttackName()));
+			}
+		}
+
+		playerMenu.createOption("pick_attack", "Choose attack", () -> {
+			Attack attack = availableAttacks.get(playerMenu.query.run());
+		});
+		playerMenu.run();
 	}
 }
