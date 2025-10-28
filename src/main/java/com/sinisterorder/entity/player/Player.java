@@ -282,6 +282,7 @@ public class Player extends Entity{
 
 		playerMenu.createOption("pick_attack", "Choose attack", () -> {
 			Attack attack = availableAttacks.get(playerMenu.query.run());
+			target.removeHealth((int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2));
 		});
 		playerMenu.run();
 	}
