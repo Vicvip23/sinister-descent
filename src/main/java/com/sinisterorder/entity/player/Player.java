@@ -19,6 +19,7 @@ public class Player extends Entity{
 	public void startInventoryManagerUi(boolean unlockSell) {
 		runPrimary = true;
 		this.unlockSell = unlockSell;
+		playerMenu.fullWipe();
 
 		while(runPrimary) {
 			playerMenu.setTitle("Your Inventory");
