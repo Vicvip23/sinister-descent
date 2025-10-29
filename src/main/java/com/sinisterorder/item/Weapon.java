@@ -1,5 +1,7 @@
 package com.sinisterorder.item;
 
+import java.util.Arrays;
+
 public class Weapon extends GenericItem{
 	private int damage;
 	private String attackset;

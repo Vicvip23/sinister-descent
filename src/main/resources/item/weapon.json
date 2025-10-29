@@ -6,8 +6,8 @@
 		"description": "Your fist.",
 		"level": 1,
 		"damage": 1,
-		"attackset": "",
-		"uniqueAttacks": ["punch"]
+		"attackset": "fist",
+		"uniqueAttacks": []
 	},
 	{
 		"itemId": "test_weapon",

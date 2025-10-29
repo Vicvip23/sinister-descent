@@ -4,5 +4,15 @@
 		"attackset": [
 			"swing"
 		]
-	}
+	},
+  {
+    "attacksetId": "fist",
+    "attackset": [
+      "punch"
+    ]
+  },
+  {
+    "attacksetId": "none",
+    "attackset": []
+  }
 ]

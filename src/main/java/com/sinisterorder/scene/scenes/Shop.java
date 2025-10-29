@@ -127,7 +127,7 @@ public class Shop extends Scene{
 			shopMenu.createQuery("item_selector", "What'd ya like to buy, kid?", "free", 0, inventory.consumableManager.list().size() - 1);
 			int selectedItem = shopMenu.query.run();
 
-			if(inventory.weaponManager.get(selectedItem).getValue() > client.inventory.purseManager.getMoney()) {
+			if(inventory.consumableManager.get(selectedItem).getValue() > client.inventory.purseManager.getMoney()) {
 				flavor = random.nextInt(3);
 
 				switch (flavor) {
@@ -150,7 +150,7 @@ public class Shop extends Scene{
 			} else {
 				client.inventory.consumableManager.add(inventory.consumableManager.get(selectedItem));
 				client.inventory.purseManager.removeMoney(inventory.consumableManager.get(selectedItem).getValue());
-				inventory.weaponManager.remove(selectedItem);
+				inventory.consumableManager.remove(selectedItem);
 				System.out.println("Thank you for your purchase.");
 				try {
 					Thread.sleep(1000);

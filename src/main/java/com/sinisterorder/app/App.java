@@ -45,6 +45,5 @@ public class App {
 		enemy.inventory.weaponManager.add("wooden_stick");
 		enemy.inventory.weaponManager.equip(0);
 		battle.run(player, enemy);
-		
 	}
 }
