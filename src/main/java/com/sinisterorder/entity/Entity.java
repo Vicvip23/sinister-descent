@@ -1,15 +1,15 @@
 package com.sinisterorder.entity;
 
-import com.sinisterorder.attack.Attack;
 import com.sinisterorder.handler.EntityDamageHandler;
 import com.sinisterorder.inventory.Inventory;
 
 public abstract class Entity implements EntityDamageHandler{
 	private String entityId;
 	private String name;
-	private int health;
 	private int maxHealth;
+	private int health;
 	private int armor;
+	private String[] drops;
 	public Inventory inventory;
 	
 	protected void createInventory() {
@@ -74,6 +74,10 @@ public abstract class Entity implements EntityDamageHandler{
 		if(health < 0) {
 			health = 0;
 		}
+	}
+
+	public String[] getDrops() {
+		return this.drops;
 	}
 
 	public abstract void attack(Entity target);
