@@ -4,6 +4,7 @@
 		"itemName": "Developer Item",
 		"sellValue": 30,
 		"description": "This is a test item. If you are seeing this, something must've went very wrong! Or you looked for it. Good job.",
+		"itemType": "item",
 		"level": 100
 	},
 	{
@@ -11,6 +12,7 @@
 		"itemName": "Weathered Gold",
 		"sellValue": 20,
 		"description": "It's old, but gold.",
+		"itemType": "item",
 		"level": 10
 	}
 ]

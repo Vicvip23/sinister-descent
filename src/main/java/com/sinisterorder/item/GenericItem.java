@@ -1,6 +1,7 @@
 package com.sinisterorder.item;
 
 import com.sinisterorder.handler.LevelHandler;
+import com.sinisterorder.item.ItemUtils.ItemType;
 
 public class GenericItem implements LevelHandler{
 	private String itemId;
@@ -8,6 +9,9 @@ public class GenericItem implements LevelHandler{
 	private int sellValue;
 	private String description;
 	private int level;
+	private ItemType itemType;
+
+
 
 	public String getId() {
 		return this.itemId;
@@ -23,6 +27,14 @@ public class GenericItem implements LevelHandler{
 
 	public String getDescription(){
 		return this.description;
+	}
+
+	public ItemType getItemType() {
+		return itemType;
+	}
+
+	protected void setItemType(ItemType itemType) {
+		this.itemType = itemType;
 	}
 
 	public int getLevel() {

@@ -4,6 +4,6 @@
 		"name": "Test Wolf",
 		"maxHealth": "20",
 		"armor": "1",
-		"drops": []
+		"drops": ["weathered_gold"]
 	}
 ]

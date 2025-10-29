@@ -7,6 +7,7 @@
 		"level": 100,
 		"effectId": "heal",
 		"effectDescription": "Heals the user.",
+		"itemType": "consumable",
 		"usesLeft": 10
 	},
 	{
@@ -17,6 +18,7 @@
 		"level": 2,
 		"effectId": "heal",
 		"effectDescription": "Heals the user.",
+		"itemType": "consumable",
 		"usesLeft": 10
 	}
 ]

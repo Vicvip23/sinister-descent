@@ -8,7 +8,7 @@ import com.sinisterorder.attack.AttackFactory;
 import com.sinisterorder.attack.AttacksetFactory;
 import com.sinisterorder.entity.Entity;
 import com.sinisterorder.entity.player.Player;
-import com.sinisterorder.item.GenericItem;
+import com.sinisterorder.item.*;
 import com.sinisterorder.scene.Scene;
 import com.sinisterorder.ui.ChoiceMenu;
 import com.sinisterorder.ui.MenuFactory;
@@ -57,8 +57,26 @@ public class Battle extends Scene{
 		battleMenu.addLabel("battle_flavor", enemy.getName() + " Has Been Defeated!\n");
 		battleMenu.addLabel("battle_drops_header", "Obtained items:\n\n");
 
-		for (GenericItem item : ItemUtils.generateBattleDrops(enemy.getEntityId())) {
-			battleMenu.addLabel("drop_" + item.getId(), String.format("%s\n", item.getName()));
+		GenericItem[] drops = ItemUtils.generateBattleDrops(enemy);
+
+		if(drops != null) {
+			for (GenericItem item : drops) {
+				battleMenu.addLabel("drop_" + item.getId(), String.format("%s\n", item.getName()));
+				switch (item.getItemType()) {
+					case item:
+						player.inventory.itemManager.add((Item) item);
+						break;
+					case weapon:
+						player.inventory.weaponManager.add((Weapon) item);
+						break;
+					case consumable:
+						player.inventory.consumableManager.add((Consumable) item);
+					default:
+						break;
+				}
+			}
+		} else {
+			battleMenu.addLabel("no_drops", "none");
 		}
 
 		battleMenu.createOption("next", "Next", () -> {

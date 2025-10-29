@@ -34,7 +34,11 @@ public class Inventory {
 		}
 
 		public void add(String itemId) {
-			items.add(ItemFactory.fromJson(itemId,"item"));
+			items.add(ItemFactory.fromJson(itemId));
+		}
+
+		public void add(Item item) {
+			items.add(item);
 		}
 
 		public Item get(int index) {
@@ -85,7 +89,7 @@ public class Inventory {
 		}
 
 		public void add(String weaponId) {
-			weapons.add(ItemFactory.fromJson(weaponId,"weapon"));
+			weapons.add(ItemFactory.fromJson(weaponId));
 		}
 
 		public void add(Weapon weapon) {
@@ -161,7 +165,7 @@ public class Inventory {
 		}
 
 		public void add(String consumableId) {
-			consumables.add(ItemFactory.fromJson(consumableId,"consumable"));
+			consumables.add(ItemFactory.fromJson(consumableId));
 		}
 
 		public void add(Consumable consumable) {
