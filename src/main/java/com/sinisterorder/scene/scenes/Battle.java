@@ -8,6 +8,7 @@ import com.sinisterorder.attack.AttackFactory;
 import com.sinisterorder.attack.AttacksetFactory;
 import com.sinisterorder.entity.Entity;
 import com.sinisterorder.entity.player.Player;
+import com.sinisterorder.item.GenericItem;
 import com.sinisterorder.scene.Scene;
 import com.sinisterorder.ui.ChoiceMenu;
 import com.sinisterorder.ui.MenuFactory;
@@ -17,7 +18,6 @@ public class Battle extends Scene{
 	private Entity enemy;
 	private ChoiceMenu battleMenu;
 	private boolean run;
-	private static Random random = new Random();
 
 	public void run(Player player, Entity enemy) {
 		this.player = player;
@@ -25,16 +25,23 @@ public class Battle extends Scene{
 		run = true;
 
 		while (run) {
-			buildMenu();
-			battleMenu.run();
-			turn();
+			if(enemy.getHealth() > 0) {
+				buildMenu();
+				battleMenu.run();
+				turn();
+			} else {
+				buildEndMenu();
+				battleMenu.run();
+			}
 		}
 	};
 
 	private void buildMenu() {
 		battleMenu = MenuFactory.create("battle", "Battle");
-		battleMenu.addLabel("battle_flavor", "A " + enemy.getName() + " Approaches!\n");
-		battleMenu.addLabel("battle_info", String.format("%s: %d\t %s: %d\n", "Health", enemy.getHealth(), "Armor", enemy.getArmor()));
+		battleMenu.addLabel("battle_enemy_header", "A " + enemy.getName() + " Approaches!\n");
+		battleMenu.addLabel("battle_enemy_info", String.format("%s: %d\t %s: %d\n", "Health", enemy.getHealth(), "Armor", enemy.getArmor()));
+		battleMenu.addLabel("battle_player_header", "\nYour Stats\n");
+		battleMenu.addLabel("battle_player_info", String.format("%s: %d\t %s: %d\n", "Health", player.getHealth(), "Armor", player.getArmor()));
 
 		battleMenu.createOption("attack", "Attack", () -> {
 			player.attack(enemy);
@@ -45,16 +52,21 @@ public class Battle extends Scene{
 		});
 	}
 
+	private void buildEndMenu() {
+		battleMenu = MenuFactory.create("battle", "Battle");
+		battleMenu.addLabel("battle_flavor", enemy.getName() + " Has Been Defeated!\n");
+		battleMenu.addLabel("battle_drops_header", "Obtained items:\n\n");
+
+		for (GenericItem item : ItemUtils.generateBattleDrops(enemy.getEntityId())) {
+			battleMenu.addLabel("drop_" + item.getId(), String.format("%s\n", item.getName()));
+		}
+
+		battleMenu.createOption("next", "Next", () -> {
+			run = false;
+		});
+	}
+
 	private void turn() {
-		ArrayList<Attack> availableAttacks = new ArrayList<>();
-
-		for (String attackId : AttacksetFactory.fromJson(enemy.inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
-			availableAttacks.add(AttackFactory.fromJson(attackId));
-		}
-		for (String attackId : enemy.inventory.weaponManager.getEquippedWeapon().getUniqueAttacks()) {
-			availableAttacks.add(AttackFactory.fromJson(attackId));	
-		}
-
 		enemy.attack(player);
 	}
 }

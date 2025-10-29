@@ -19,6 +19,9 @@ public class Player extends Entity{
 	public Player() {
 		this.createInventory();
 		playerMenu = MenuFactory.create("player_menu", "");
+		this.setArmor(1);
+		this.setMaxHealth(30);
+		this.setHealth(30);
 	}
 
 	public void startInventoryManagerUi(boolean unlockSell) {
