@@ -290,4 +290,9 @@ public class Player extends Entity{
 		});
 		playerMenu.run();
 	}
+
+	@Override
+	public String getLastAction() {
+		return null;
+	}
 }

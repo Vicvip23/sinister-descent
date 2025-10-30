@@ -4,11 +4,11 @@ import com.sinisterorder.handler.EntityDamageHandler;
 import com.sinisterorder.inventory.Inventory;
 
 public abstract class Entity implements EntityDamageHandler{
-	private String entityId;
-	private String name;
-	private int maxHealth;
-	private int health;
-	private int armor;
+	protected String entityId;
+	protected String name;
+	protected int maxHealth;
+	protected int health;
+	protected int armor;
 	private String[] drops;
 	public Inventory inventory;
 	
@@ -81,4 +81,6 @@ public abstract class Entity implements EntityDamageHandler{
 	}
 
 	public abstract void attack(Entity target);
+
+	public abstract String getLastAction();
 }

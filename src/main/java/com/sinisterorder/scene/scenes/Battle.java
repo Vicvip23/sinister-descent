@@ -43,6 +43,10 @@ public class Battle extends Scene{
 		battleMenu.addLabel("battle_player_header", "\nYour Stats\n");
 		battleMenu.addLabel("battle_player_info", String.format("%s: %d\t %s: %d\n", "Health", player.getHealth(), "Armor", player.getArmor()));
 
+		if(enemy.getLastAction() != null) {
+			battleMenu.addLabel("enemy_action", enemy.getLastAction() + "\n");
+		}
+
 		battleMenu.createOption("attack", "Attack", () -> {
 			player.attack(enemy);
 		});
