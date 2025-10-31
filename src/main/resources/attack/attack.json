@@ -3,12 +3,21 @@
 		"attackId": "swing",
 		"attackName": "Swing",
 		"attackDescription": "Swing your weapon at your opponent. Not much to it.",
-		"attackMultiplier": 1.1
+		"attackMultiplier": 1.1,
+		"weight": 1
 	},
 	{
 		"attackId": "punch",
 		"attackName": "Punch",
 		"attackDescription": "Punch your opponent. Ouch.",
-		"attackMultiplier": 1
+		"attackMultiplier": 1,
+		"weight": 2
+	},
+	{
+		"attackId": "nothing",
+		"attackName": "Nothing",
+		"attackDescription": "Do nothing.",
+		"attackMultiplier": 0,
+		"weight": 1
 	}
 ]

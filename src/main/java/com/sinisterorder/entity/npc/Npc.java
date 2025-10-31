@@ -8,7 +8,7 @@ import com.sinisterorder.attack.AttackFactory;
 import com.sinisterorder.attack.AttacksetFactory;
 import com.sinisterorder.entity.Entity;
 import com.sinisterorder.inventory.Inventory;
-import com.sinisterorder.otherutils.OtherUtils;
+import com.sinisterorder.otherutils.RandomUtils;
 
 public class Npc extends Entity{
 
@@ -29,7 +29,7 @@ public class Npc extends Entity{
 
 	@Override
 	public void attack(Entity target) {
-		if(this.health < this.maxHealth * 0.2 && OtherUtils.chance(5)) {
+		if(this.health < this.maxHealth * 0.2 && RandomUtils.chance(5)) {
 			this.health += (this.maxHealth * 0.2);
 			lastAction = this.name + " has healed its wounds! (recovered " + (this.maxHealth * 0.2) + " health.)";
 		} else {

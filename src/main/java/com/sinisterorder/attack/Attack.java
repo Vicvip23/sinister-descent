@@ -1,10 +1,13 @@
 package com.sinisterorder.attack;
 
-public class Attack{
+import com.sinisterorder.handler.RandomChoiceByWeightInterface;
+
+public class Attack implements RandomChoiceByWeightInterface{
       private String attackId;
       private String attackName;
       private String attackDescription;
       private float attackMultiplier;
+      private int weight;
 
     public String getAttackId() {
         return this.attackId;
@@ -36,5 +39,9 @@ public class Attack{
 
     public void setAttackMultiplayer(float attackMultiplier) {
         this.attackMultiplier = attackMultiplier;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }
