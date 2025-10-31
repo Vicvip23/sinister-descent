@@ -97,7 +97,7 @@ public class Player extends Entity{
 
 					playerMenu.addLabel("", String.format("Name: %s\nSell value: %d\nDamage: %d\nLevel: %d\nDescription: %s", 
 						inventory.weaponManager.get(selectedItem).getName(),
-						inventory.weaponManager.get(selectedItem).getValue(),
+						inventory.weaponManager.get(selectedItem).getValue() / 2,
 						inventory.weaponManager.get(selectedItem).getDamage(),
 						inventory.weaponManager.get(selectedItem).getLevel(),
 						inventory.weaponManager.get(selectedItem).getDescription()
@@ -163,7 +163,7 @@ public class Player extends Entity{
 
 					playerMenu.addLabel("", String.format("Name: %s\nSell value: %d\nLevel: %d\nDescription: %s", 
 						inventory.itemManager.get(selectedItem).getName(),
-						inventory.itemManager.get(selectedItem).getValue(),
+						inventory.itemManager.get(selectedItem).getValue() / 2,
 						inventory.itemManager.get(selectedItem).getLevel(),
 						inventory.itemManager.get(selectedItem).getDescription()
 					));
@@ -216,7 +216,7 @@ public class Player extends Entity{
 
 					playerMenu.addLabel("", String.format("Name: %s\nSell value: %d\nEffect description: %s\nUses left: %d\nLevel: %d\nDescription: %s", 
 						inventory.consumableManager.get(selectedItem).getName(),
-						inventory.consumableManager.get(selectedItem).getValue(),
+						inventory.consumableManager.get(selectedItem).getValue() / 2,
 						inventory.consumableManager.get(selectedItem).getEffectDescription(),
 						inventory.consumableManager.get(selectedItem).getUses(),
 						inventory.consumableManager.get(selectedItem).getLevel(),
@@ -286,7 +286,8 @@ public class Player extends Entity{
 
 		playerMenu.createOption("pick_attack", "Choose attack", () -> {
 			Attack attack = availableAttacks.get(playerMenu.query.run());
-			target.removeHealth((int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2));
+			int damage = (int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2);
+			target.removeHealth(damage);
 		});
 		playerMenu.run();
 	}

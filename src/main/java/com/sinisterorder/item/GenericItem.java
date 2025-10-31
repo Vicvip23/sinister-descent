@@ -6,7 +6,7 @@ import com.sinisterorder.item.ItemUtils.ItemType;
 public class GenericItem implements LevelHandler{
 	private String itemId;
 	private String itemName;
-	private int sellValue;
+	private int value;
 	private String description;
 	private int level;
 	private ItemType itemType;
@@ -22,7 +22,7 @@ public class GenericItem implements LevelHandler{
 	}
 
 	public int getValue() {
-		return this.sellValue;
+		return this.value;
 	}
 
 	public String getDescription(){
@@ -43,6 +43,6 @@ public class GenericItem implements LevelHandler{
 
 	public void scaleByLevel(int level) {
 		this.level = level;
-		this.sellValue = this.sellValue * (1 + (level / 8));
+		this.value = this.value * (1 + (level / 8));
 	}
 }

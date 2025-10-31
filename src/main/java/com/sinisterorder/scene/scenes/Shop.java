@@ -31,6 +31,7 @@ public class Shop extends Scene{
 		generateInventory();
 		while(run) {
 			buildMenu();
+			System.err.println("test");
 			shopMenu.run();
 		}
 	}
@@ -70,9 +71,9 @@ public class Shop extends Scene{
 
 		for (int i = 1; i <= this.inventory.weaponManager.list().size(); ++i) {
 			if(i % 3 == 0 && i != this.inventory.weaponManager.list().size()) {
-				shopMenu.addLabel("" + i, String.format("%d. %s\n", i, this.inventory.weaponManager.get(i - 1).getName()));
+				shopMenu.addLabel("" + i, String.format("%d. %s // %d\n", i, this.inventory.weaponManager.get(i - 1).getName(), this.inventory.weaponManager.get(i - 1).getValue()));
 			} else {
-				shopMenu.addLabel("" + i, String.format("%d. %s\t", i, this.inventory.weaponManager.get(i - 1).getName()));
+				shopMenu.addLabel("" + i, String.format("%d. %s // %d\t", i, this.inventory.weaponManager.get(i - 1).getName(), this.inventory.weaponManager.get(i - 1).getValue()));
 			}
 		}
 
@@ -80,9 +81,9 @@ public class Shop extends Scene{
 
 		for (int i = 1; i <= this.inventory.consumableManager.list().size(); ++i) {
 			if(i % 3 == 0 && i != this.inventory.consumableManager.list().size()) {
-				shopMenu.addLabel("" + i, String.format("%d. %s\n", i, this.inventory.consumableManager.get(i - 1).getName()));
+				shopMenu.addLabel("" + i, String.format("%d. %s // %d\n", i, this.inventory.consumableManager.get(i - 1).getName(), this.inventory.consumableManager.get(i - 1).getValue()));
 			} else {
-				shopMenu.addLabel("" + i, String.format("%d. %s\t", i, this.inventory.consumableManager.get(i - 1).getName()));
+				shopMenu.addLabel("" + i, String.format("%d. %s // %d\t", i, this.inventory.consumableManager.get(i - 1).getName(), this.inventory.consumableManager.get(i - 1).getValue()));
 			}
 		}
 

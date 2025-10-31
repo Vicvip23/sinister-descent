@@ -9,6 +9,6 @@
 		"attackId": "punch",
 		"attackName": "Punch",
 		"attackDescription": "Punch your opponent. Ouch.",
-		"attackMultiplier": 0.8
+		"attackMultiplier": 1
 	}
 ]

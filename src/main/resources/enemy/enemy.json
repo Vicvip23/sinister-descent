@@ -2,8 +2,8 @@
 	{
 		"entityId": "test_wolf",
 		"name": "Test Wolf",
-		"maxHealth": "20",
-		"armor": "1",
+		"maxHealth": 20,
+		"armor": 1,
 		"drops": ["weathered_gold"]
 	}
 ]

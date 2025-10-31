@@ -2,18 +2,18 @@
 	{
 		"itemId": "fist",
 		"itemName": "Fist",
-		"sellValue": 0,
+		"value": 0,
 		"description": "Your fist.",
 		"itemType": "weapon",
 		"level": 1,
-		"damage": 1,
+		"damage": 10,
 		"attackset": "fist",
 		"uniqueAttacks": []
 	},
 	{
 		"itemId": "test_weapon",
 		"itemName": "Developer Sword",
-		"sellValue": 30,
+		"value": 30,
 		"description": "This is a test item. If you are seeing this, something must've went very wrong! Or you looked for it. Good job.",
 		"itemType": "weapon",
 		"level": 100,
@@ -24,7 +24,7 @@
 	{
 		"itemId": "wooden_stick",
 		"itemName": "Wooden Stick",
-		"sellValue": 2,
+		"value": 2,
 		"description": "Not the best weapon, but beats using your fists.",
 		"itemType": "weapon",
 		"level": 1,
