@@ -6,7 +6,7 @@
 		"description": "Your fist.",
 		"itemType": "weapon",
 		"level": 1,
-		"damage": 10,
+		"damage": 1,
 		"attackset": "fist",
 		"uniqueAttacks": []
 	},
