@@ -4,6 +4,7 @@
 		"name": "Test Wolf",
 		"maxHealth": 20,
 		"armor": 1,
+		"uniqueAttackIds": ["nothing"],
 		"drops": ["weathered_gold"]
 	}
 ]
