@@ -13,6 +13,7 @@ import com.sinisterorder.otherutils.RandomUtils;
 public class Npc extends Entity{
 
 	private String lastAction;
+	private String[] uniqueAttackIds;
 	private static Random random = new Random();
 
 	public Npc() {
@@ -34,6 +35,12 @@ public class Npc extends Entity{
 			lastAction = this.name + " has healed its wounds! (recovered " + (this.maxHealth * 0.2) + " health.)";
 		} else {
 			ArrayList<Attack> availableAttacks = new ArrayList<>();
+
+			if(uniqueAttackIds != null) {
+				for (String attackId : uniqueAttackIds) {
+					availableAttacks.add(AttackFactory.fromJson(attackId));
+				}
+			}
 
 			if(inventory.weaponManager.getEquippedWeapon() != null) {
 				for (String attackId : AttacksetFactory.fromJson(inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
