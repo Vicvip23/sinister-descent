@@ -55,7 +55,7 @@ public class Npc extends Entity{
 				availableAttacks.add(AttackFactory.fromJson("punch"));
 			}
 
-			Attack attack = availableAttacks.get(random.nextInt(availableAttacks.size()));
+			Attack attack = (Attack) RandomUtils.rollByWeight(availableAttacks.toArray(new Attack[availableAttacks.size()]));
 			int damage = (int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2);
 			target.removeHealth(damage);
 			lastAction = name + " has attacked you for " + damage + " damage!";
