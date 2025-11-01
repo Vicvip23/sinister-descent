@@ -24,6 +24,22 @@ public class MenuUtils {
         \\/         \\/        \\/            \\/                \\/     \\/     \\/     \\/    \\/     \\/      
 			""";
 
+	static public final String skullArt = """                                    
+                      ############                      
+                   #####        #####                   
+                 ####              ####                 
+                ###                  ###                
+               ###  /###\\      /###\\  ###               
+               ##  |#####|    |#####|  ##               
+              ###  |#####|    |#####|  ###              
+              ###  |#####|    |#####|  ###              
+              ###   \\###/      \\###/   ###              
+               ####%____        ____%####               
+                  ####"          "####                  
+                    ##  ##    ##  ##                    
+                    ##  ##    ##  ##                    
+                     ##############""";
+
 	static public void clear() {
 		System.out.print("\033\143");
 	}
@@ -39,7 +55,7 @@ public class MenuUtils {
 		}
 	}
 
-	static private void wait(int delay) {
+	static public void wait(int delay) {
 		try {
 			Thread.sleep(delay);
 		} catch (InterruptedException e) {

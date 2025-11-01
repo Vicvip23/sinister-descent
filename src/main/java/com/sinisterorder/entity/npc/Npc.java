@@ -56,9 +56,13 @@ public class Npc extends Entity{
 			}
 
 			Attack attack = (Attack) RandomUtils.rollByWeight(availableAttacks.toArray(new Attack[availableAttacks.size()]));
-			int damage = (int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2);
-			target.removeHealth(damage);
-			lastAction = name + " has attacked you for " + damage + " damage!";
+			if(attack.getAttackId().equals("nothing")) {
+				lastAction = name + " is moping around.";
+			} else {
+				int damage = (int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2);
+				target.removeHealth(damage);
+				lastAction = name + " has attacked you for " + damage + " damage!";
+			}
 		}
 	}
 }

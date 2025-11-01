@@ -11,7 +11,9 @@ import com.sinisterorder.entity.player.Player;
 import com.sinisterorder.item.*;
 import com.sinisterorder.scene.Scene;
 import com.sinisterorder.ui.ChoiceMenu;
+import com.sinisterorder.ui.EndMenu;
 import com.sinisterorder.ui.MenuFactory;
+import com.sinisterorder.ui.MenuUtils;
 
 public class Battle extends Scene{
 	private Player player;
@@ -26,9 +28,23 @@ public class Battle extends Scene{
 
 		while (run) {
 			if(enemy.getHealth() > 0) {
-				buildMenu();
+				buildMenu(true);
+				
+				if(player.getHealth() <= 0) {
+					battleMenu.display();
+					MenuUtils.wait(2000);
+					EndMenu.run();
+				}
 				battleMenu.run();
-				turn();
+				
+				// TODO: fix hacky solution
+				if(enemy.getHealth() > 0) {
+					turn();
+					buildMenu(false);
+					battleMenu.display();
+					MenuUtils.wait(250);
+				}
+
 			} else {
 				buildEndMenu();
 				battleMenu.run();
@@ -36,14 +52,14 @@ public class Battle extends Scene{
 		}
 	};
 
-	private void buildMenu() {
+	private void buildMenu(boolean displayEnemyAction) {
 		battleMenu = MenuFactory.create("battle", "Battle");
 		battleMenu.addLabel("battle_enemy_header", "A " + enemy.getName() + " Approaches!\n");
 		battleMenu.addLabel("battle_enemy_info", String.format("%s: %d\t %s: %d\n", "Health", enemy.getHealth(), "Armor", enemy.getArmor()));
 		battleMenu.addLabel("battle_player_header", "\nYour Stats\n");
 		battleMenu.addLabel("battle_player_info", String.format("%s: %d\t %s: %d\n", "Health", player.getHealth(), "Armor", player.getArmor()));
 
-		if(enemy.getLastAction() != null) {
+		if(enemy.getLastAction() != null && displayEnemyAction) {
 			battleMenu.addLabel("enemy_action", enemy.getLastAction() + "\n");
 		}
 
