@@ -9,7 +9,6 @@ public class AttackFactory {
 
     public static Attack fromJson(String attackId){
 
-
         try {
             FileReader reader = new FileReader("src/main/resources/attack/attack.json");
             Attack[] attacks = gson.fromJson(reader, Attack[].class);
@@ -19,11 +18,11 @@ public class AttackFactory {
                     return attack;
                 }
             }
+
             reader.close();
+
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
 
         return null;

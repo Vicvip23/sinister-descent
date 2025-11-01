@@ -4,7 +4,7 @@ import com.sinisterorder.handler.LevelHandler;
 import com.sinisterorder.handler.RandomChoiceByWeightInterface;
 import com.sinisterorder.item.ItemUtils.ItemType;
 
-public class GenericItem implements LevelHandler, RandomChoiceByWeightInterface{
+public class GenericItem implements LevelHandler, RandomChoiceByWeightInterface {
 	private String itemId;
 	private String itemName;
 	private int value;
@@ -25,7 +25,7 @@ public class GenericItem implements LevelHandler, RandomChoiceByWeightInterface{
 		return this.value;
 	}
 
-	public String getDescription(){
+	public String getDescription() {
 		return this.description;
 	}
 

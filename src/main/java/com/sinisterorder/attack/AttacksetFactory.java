@@ -9,7 +9,6 @@ public class AttacksetFactory {
 
     public static Attackset fromJson(String attacksetId){
 
-
         try {
             FileReader reader = new FileReader("src/main/resources/attack/attackset.json");
             Attackset[] attacksets = gson.fromJson(reader, Attackset[].class);
@@ -19,11 +18,10 @@ public class AttacksetFactory {
                     return attack;
                 }
             }
+
             reader.close();
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
 
         return null;

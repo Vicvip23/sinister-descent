@@ -10,7 +10,7 @@ import com.sinisterorder.ui.ChoiceMenu;
 import com.sinisterorder.ui.MenuFactory;
 import com.sinisterorder.ui.MenuUtils;
 
-public class Player extends Entity{
+public class Player extends Entity {
 	private ChoiceMenu playerMenu;
 	private boolean runPrimary;
 	private boolean runSecondary;
@@ -18,10 +18,10 @@ public class Player extends Entity{
 
 	public Player() {
 		this.createInventory();
-		playerMenu = MenuFactory.create("player_menu", "");
 		this.setArmor(1);
 		this.setMaxHealth(30);
 		this.setHealth(30);
+		playerMenu = MenuFactory.create("player_menu", "");
 	}
 
 	public void startInventoryManagerUi(boolean unlockSell) {
@@ -34,14 +34,14 @@ public class Player extends Entity{
 			playerMenu.addLabel("inventory_art", MenuUtils.inventoryArt);
 
 			if(inventory.weaponManager.getEquippedWeapon() == null) {
-				playerMenu.addLabel("balance", "\nWeapons: " + inventory.weaponManager.list().size());
+				playerMenu.addLabel("balance1", "\nWeapons: " + inventory.weaponManager.list().size());
 			} else {
-				playerMenu.addLabel("balance", "\nWeapons: " + (inventory.weaponManager.list().size() + 1));
+				playerMenu.addLabel("balance1", "\nWeapons: " + (inventory.weaponManager.list().size() + 1));
 			}
 
-			playerMenu.addLabel("balance", "\nConsumables: " + inventory.consumableManager.list().size());
-			playerMenu.addLabel("balance", "\nItems: " + inventory.itemManager.list().size());
-			playerMenu.addLabel("balance", "\nBalance: " + inventory.purseManager.getMoney());
+			playerMenu.addLabel("balance2", "\nConsumables: " + inventory.consumableManager.list().size());
+			playerMenu.addLabel("balance3", "\nItems: " + inventory.itemManager.list().size());
+			playerMenu.addLabel("balance4", "\nBalance: " + inventory.purseManager.getMoney());
 
 			playerMenu.createOption("weapon_manager", "Manage weapons", () -> {
 				playerMenu.fullWipe();
@@ -90,8 +90,8 @@ public class Player extends Entity{
 			if(inventory.weaponManager.list().size() > 0) {
 				playerMenu.createOption("more_info", "More info", () -> {
 					playerMenu.createQuery("item_selector", "Input which weapon you'd like more information about", "free", 0, inventory.weaponManager.list().size() - 1);
+					
 					int selectedItem = playerMenu.query.run();
-
 					playerMenu.fullWipe();
 					playerMenu.setTitle("Details");
 
@@ -109,8 +109,8 @@ public class Player extends Entity{
 
 				playerMenu.createOption("equip", "Equip", () -> {
 					playerMenu.createQuery("item_selector", "Input which weapon you'd like to equip", "free", 0, inventory.weaponManager.list().size() - 1);
+					
 					int selectedItem = playerMenu.query.run();
-
 					this.inventory.weaponManager.equip(selectedItem);
 				});
 
@@ -121,8 +121,8 @@ public class Player extends Entity{
 				if(unlockSell) {
 					playerMenu.createOption("sell", "Sell weapon", () -> {
 						playerMenu.createQuery("item_selector", "Input which weapon you'd like to sell", "free", 0, inventory.weaponManager.list().size() - 1);
+						
 						int selectedItem = playerMenu.query.run();
-
 						this.inventory.purseManager.addMoney(this.inventory.weaponManager.get(selectedItem).getValue() / 2);
 						this.inventory.weaponManager.remove(selectedItem);
 					});
@@ -156,8 +156,8 @@ public class Player extends Entity{
 			if(inventory.itemManager.list().size() > 0) {
 				playerMenu.createOption("more_info", "More info", () -> {
 					playerMenu.createQuery("item_selector", "Input which item you'd like more information about", "free", 0, inventory.itemManager.list().size() - 1);
+					
 					int selectedItem = playerMenu.query.run();
-
 					playerMenu.fullWipe();
 					playerMenu.setTitle("Details");
 
@@ -175,8 +175,8 @@ public class Player extends Entity{
 				if(unlockSell) {
 					playerMenu.createOption("sell", "Sell item", () -> {
 						playerMenu.createQuery("item_selector", "Input which item you'd like to sell", "free", 0, inventory.itemManager.list().size() - 1);
+						
 						int selectedItem = playerMenu.query.run();
-
 						this.inventory.purseManager.addMoney(this.inventory.itemManager.get(selectedItem).getValue() / 2);
 						this.inventory.itemManager.remove(selectedItem);
 					});
@@ -209,8 +209,8 @@ public class Player extends Entity{
 			if(inventory.consumableManager.list().size() > 0) {
 				playerMenu.createOption("more_info", "More info", () -> {
 					playerMenu.createQuery("item_selector", "Input which consumable you'd like more information about", "free", 0, inventory.consumableManager.list().size() - 1);
+					
 					int selectedItem = playerMenu.query.run();
-
 					playerMenu.fullWipe();
 					playerMenu.setTitle("Details");
 
@@ -229,16 +229,16 @@ public class Player extends Entity{
 
 				playerMenu.createOption("use", "Use consumable", () -> {
 					playerMenu.createQuery("item_selector", "Input which consumable you'd like to use", "free", 0, inventory.consumableManager.list().size() - 1);
+					
 					int selectedItem = playerMenu.query.run();
-
 					inventory.consumableManager.use(selectedItem);
 				});
 
 				if(unlockSell) {
 					playerMenu.createOption("sell", "Sell consumable", () -> {
 						playerMenu.createQuery("item_selector", "Input which consumable you'd like to sell", "free", 0, inventory.consumableManager.list().size() - 1);
+						
 						int selectedItem = playerMenu.query.run();
-
 						this.inventory.purseManager.addMoney(this.inventory.consumableManager.get(selectedItem).getValue() / 2);
 						this.inventory.consumableManager.remove(selectedItem);
 					});
@@ -259,12 +259,15 @@ public class Player extends Entity{
 		ArrayList<Attack> availableAttacks = new ArrayList<>();
 
 		if(inventory.weaponManager.getEquippedWeapon() != null) {
+
 			for (String attackId : AttacksetFactory.fromJson(inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
 				availableAttacks.add(AttackFactory.fromJson(attackId));
 			}
+
 			for (String attackId : inventory.weaponManager.getEquippedWeapon().getUniqueAttacks()) {
 				availableAttacks.add(AttackFactory.fromJson(attackId));	
 			}
+
 		} else {
 			inventory.weaponManager.add("fist");
 			inventory.weaponManager.equip(0);
@@ -277,11 +280,13 @@ public class Player extends Entity{
 		playerMenu.setTitle("Attacks");
 
 		for (int i = 1; i <= availableAttacks.size(); ++i) {
+
 			if(i % 3 == 0 && i != availableAttacks.size()) {
 				playerMenu.addLabel("" + i, String.format("%d. %s\n", i, availableAttacks.get(i - 1).getAttackName()));
 			} else {
 				playerMenu.addLabel("" + i, String.format("%d. %s\t", i, availableAttacks.get(i - 1).getAttackName()));
 			}
+
 		}
 
 		playerMenu.createOption("pick_attack", "Choose attack", () -> {
@@ -289,6 +294,7 @@ public class Player extends Entity{
 			int damage = (int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2);
 			target.removeHealth(damage);
 		});
+
 		playerMenu.run();
 	}
 

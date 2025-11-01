@@ -38,6 +38,7 @@ public class ItemUtils {
 	public static Item[] generateBattleDrops(Entity killed) {
 		String[] possibleDrops = killed.getDrops();
 		ArrayList<GenericItem> drops = new ArrayList<>();
+		
 		if(possibleDrops.length > 0) {
 			for(int i = 0; i < 3; ++i) {
 				drops.add(ItemFactory.fromJson(possibleDrops[random.nextInt(possibleDrops.length)]));

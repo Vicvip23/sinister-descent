@@ -1,19 +1,10 @@
 package com.sinisterorder.scene.scenes;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.sinisterorder.attack.Attack;
-import com.sinisterorder.attack.AttackFactory;
-import com.sinisterorder.attack.AttacksetFactory;
 import com.sinisterorder.entity.Entity;
 import com.sinisterorder.entity.player.Player;
-import com.sinisterorder.item.*;
 import com.sinisterorder.scene.Scene;
-import com.sinisterorder.ui.ChoiceMenu;
-import com.sinisterorder.ui.EndMenu;
-import com.sinisterorder.ui.MenuFactory;
-import com.sinisterorder.ui.MenuUtils;
+import com.sinisterorder.item.*;
+import com.sinisterorder.ui.*;
 
 public class Battle extends Scene{
 	private Player player;
@@ -35,8 +26,10 @@ public class Battle extends Scene{
 					MenuUtils.wait(2000);
 					EndMenu.run();
 				}
+
 				battleMenu.run();
 				
+				// Holy hack
 				// TODO: fix hacky solution
 				if(enemy.getHealth() > 0) {
 					turn();
@@ -54,6 +47,7 @@ public class Battle extends Scene{
 
 	private void buildMenu(boolean displayEnemyAction) {
 		battleMenu = MenuFactory.create("battle", "Battle");
+
 		battleMenu.addLabel("battle_enemy_header", "A " + enemy.getName() + " Approaches!\n");
 		battleMenu.addLabel("battle_enemy_info", String.format("%s: %d\t %s: %d\n", "Health", enemy.getHealth(), "Armor", enemy.getArmor()));
 		battleMenu.addLabel("battle_player_header", "\nYour Stats\n");
@@ -74,6 +68,7 @@ public class Battle extends Scene{
 
 	private void buildEndMenu() {
 		battleMenu = MenuFactory.create("battle", "Battle");
+
 		battleMenu.addLabel("battle_flavor", enemy.getName() + " Has Been Defeated!\n");
 		battleMenu.addLabel("battle_drops_header", "Obtained items:\n\n");
 
@@ -82,6 +77,7 @@ public class Battle extends Scene{
 		if(drops != null) {
 			for (GenericItem item : drops) {
 				battleMenu.addLabel("drop_" + item.getId(), String.format("%s\n", item.getName()));
+				
 				switch (item.getItemType()) {
 					case item:
 						player.inventory.itemManager.add((Item) item);

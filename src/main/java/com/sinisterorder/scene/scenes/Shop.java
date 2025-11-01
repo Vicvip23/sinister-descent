@@ -8,16 +8,25 @@ import com.sinisterorder.item.ItemUtils;
 import com.sinisterorder.scene.Scene;
 import com.sinisterorder.ui.ChoiceMenu;
 import com.sinisterorder.ui.MenuFactory;
+import com.sinisterorder.ui.MenuUtils;
 
 public class Shop extends Scene{
 	private Player client;
 	private Inventory inventory;
 	private ChoiceMenu shopMenu;
-	private static Random random = new Random();
 	private int flavor;
 	private boolean run;
+	private int weaponSelectionSize;
+	private int consumableSelectionSize;
+	private static Random random = new Random();
 
 	public Shop() {
+		inventory = new Inventory();
+		weaponSelectionSize = 4;
+		consumableSelectionSize = 2;
+	}
+
+	public Shop(int weaponSelectionSize, int consumableSelectionSize) {
 		inventory = new Inventory();
 	}
 
@@ -27,24 +36,22 @@ public class Shop extends Scene{
 
 	public void run() {
 		run = true;
-
 		generateInventory();
+
 		while(run) {
 			buildMenu();
-			System.err.println("test");
 			shopMenu.run();
 		}
 	}
 
 	private void generateInventory() {
-
 		inventory.wipe();
 
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < weaponSelectionSize; i++) {
 			inventory.weaponManager.add(ItemUtils.weaponIdList[random.nextInt(ItemUtils.weaponIdList.length)]);
 		}
 
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < consumableSelectionSize; i++) {
 			inventory.consumableManager.add(ItemUtils.consumableIdList[random.nextInt(ItemUtils.consumableIdList.length)]);
 		}
 	}
@@ -54,16 +61,17 @@ public class Shop extends Scene{
 		shopMenu = MenuFactory.create("shop_menu", "Shop");
 
 		shopMenu.addLabel("welcome", "Welcome to the shop.\n");
+
 		flavor = random.nextInt(3);
 		switch (flavor) {
 			case 0:
-				shopMenu.addLabel("flavor1", "May these wares aid you in this sinister descent.\n");
+				shopMenu.addLabel("flavor", "May these wares aid you in this sinister descent.\n");
 				break;
 			case 1:
-				shopMenu.addLabel("flavor2", "What can I get ya?\n");
+				shopMenu.addLabel("flavor", "What can I get ya?\n");
 				break;
 			case 2:
-				shopMenu.addLabel("flavor3", "Be quick.\n");
+				shopMenu.addLabel("flavor", "Be quick.\n");
 				break;
 		}
 
@@ -92,8 +100,8 @@ public class Shop extends Scene{
 			int selectedItem = shopMenu.query.run();
 
 			if(inventory.weaponManager.get(selectedItem).getValue() > client.inventory.purseManager.getMoney()) {
+				
 				flavor = random.nextInt(3);
-
 				switch (flavor) {
 					case 0:
 						System.out.println("No dice.");
@@ -106,21 +114,13 @@ public class Shop extends Scene{
 						break;
 				}
 
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				MenuUtils.wait(1000);
 			} else {
 				client.inventory.weaponManager.add(inventory.weaponManager.get(selectedItem));
 				client.inventory.purseManager.removeMoney(inventory.weaponManager.get(selectedItem).getValue());
 				inventory.weaponManager.remove(selectedItem);
 				System.out.println("Thank you for your purchase.");
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				MenuUtils.wait(1000);
 			}
 		});
 
@@ -129,8 +129,8 @@ public class Shop extends Scene{
 			int selectedItem = shopMenu.query.run();
 
 			if(inventory.consumableManager.get(selectedItem).getValue() > client.inventory.purseManager.getMoney()) {
+				
 				flavor = random.nextInt(3);
-
 				switch (flavor) {
 					case 0:
 						System.out.println("No dice.");
@@ -142,22 +142,14 @@ public class Shop extends Scene{
 						System.out.println("Come back when you're a little richer.");
 						break;
 				}
-
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				
+				MenuUtils.wait(1000);
 			} else {
 				client.inventory.consumableManager.add(inventory.consumableManager.get(selectedItem));
 				client.inventory.purseManager.removeMoney(inventory.consumableManager.get(selectedItem).getValue());
 				inventory.consumableManager.remove(selectedItem);
 				System.out.println("Thank you for your purchase.");
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				MenuUtils.wait(1000);
 			}
 		});
 

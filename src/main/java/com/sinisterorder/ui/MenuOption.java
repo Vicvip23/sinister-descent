@@ -33,7 +33,7 @@ public class MenuOption {
 	}
 
 	// Run saved lambda
-	public void runAction(){
+	public void runAction() {
 		this.action.action();
 	};
 }

@@ -8,9 +8,9 @@ import com.sinisterorder.handler.GenericActionHandler;
 public class ChoiceMenu {
 	private String menuId;
 	private String menuTitle;
+	public Query query;
 	private ArrayList<MenuOption> options = new ArrayList<MenuOption>();
 	private ArrayList<Label> labels = new ArrayList<Label>();
-	public Query query;
 	static private Scanner scanner = new Scanner(System.in);
 
 	ChoiceMenu(String menuId, String menuTitle) {
@@ -59,6 +59,7 @@ public class ChoiceMenu {
 		if(this.options == null) {
 			this.options = new ArrayList<MenuOption>();
 		}
+
 		this.options.add(option);
 	}
 
@@ -67,6 +68,7 @@ public class ChoiceMenu {
 	}
 
 	public void addAction(String optionId, GenericActionHandler action) {
+
 		for (MenuOption menuOption : options) {
 			if(menuOption.getOptionId().equals(optionId)) {
 				menuOption.setAction(action);
@@ -78,10 +80,12 @@ public class ChoiceMenu {
 		if(labels == null) {
 			labels = new ArrayList<Label>();
 		}
+
 		labels.add(new Label(labelId, text));
 	}
 
 	public void setLabel(String labelId, String text) {
+
 		for (Label label : labels) {
 			if(label.getLabelId() == labelId) {
 				label.setText(text);
@@ -100,6 +104,7 @@ public class ChoiceMenu {
 	}
 
 	public void runOption(String optionId) {
+
 		for (MenuOption option : options) {
 			if(option.getOptionId().equals(optionId)) {
 				option.runAction();
@@ -108,16 +113,17 @@ public class ChoiceMenu {
 	}
 
 	public void display() {
-		
 		MenuUtils.clear();
 		String titleText = String.format("%s  %s  %s", "----====", this.menuTitle, "====----");
 		System.out.printf("%s\n", titleText);
 
 		if(labels.size() > 0) {
 			MenuUtils.separator();
+
 			for(Label label : labels) {
 				System.out.print(label.getText());
 			}
+
 			MenuUtils.separator();
 			System.out.println();
 		}
@@ -128,6 +134,7 @@ public class ChoiceMenu {
 			} catch (Exception e) {
 				System.out.printf("%d) %s", i + 1, options.get(i).getName());
 			}
+
 			System.out.println();
 		}
 		
@@ -137,26 +144,26 @@ public class ChoiceMenu {
 		int input = -1;
 		boolean ranBefore = false;
 		display();
+
 		while (input < 0 || input >= options.size()) {
+
 			if(ranBefore){
 				MenuUtils.clear();
 				display();
 				System.out.println("Invalid input, try again.");
 			}
+
 			while(!scanner.hasNextInt()){
 				display();
 				System.out.println("Invalid input, try again.");
 				scanner.next();
 			}
+
 			ranBefore = true;
 			input = scanner.nextInt() - 1;
 		}
 
 		options.get(input).runAction();
-	}
-
-	public void createQuery(String queryId, String queryTitle, String inputMode, int inputRangeStart, int inputRangeEnd) {
-		this.query = new Query(queryId, queryTitle, inputMode, inputRangeStart, inputRangeEnd);
 	}
 
 	public void createQuery(String queryId, String queryTitle, String inputMode) {
@@ -165,6 +172,10 @@ public class ChoiceMenu {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void createQuery(String queryId, String queryTitle, String inputMode, int inputRangeStart, int inputRangeEnd) {
+		this.query = new Query(queryId, queryTitle, inputMode, inputRangeStart, inputRangeEnd);
 	}
 
 	public class Query {
@@ -220,6 +231,7 @@ public class ChoiceMenu {
 		}
 
 		public void addAction(String optionId, GenericActionHandler action) {
+
 			for (MenuOption menuOption : suboptions) {
 				if(menuOption.getOptionId().equals(optionId)) {
 					menuOption.setAction(action);
@@ -238,6 +250,7 @@ public class ChoiceMenu {
 		}
 
 		public void runOption(String optionId) {
+
 			for (MenuOption option : suboptions) {
 				if(option.getOptionId().equals(optionId)) {
 					option.runAction();
@@ -246,16 +259,17 @@ public class ChoiceMenu {
 		}
 
 		private void displayOptionMode() {
-			
 			String titleText = String.format("%s  %s  %s", "--==", this.queryTitle, "==--");
 			System.out.printf("%s\n\n", titleText);
 
 			for(int i = 0; i < suboptions.size(); i += 2) {
+
 				try {
 					System.out.printf("%d) %s\t%d) %s", i + 1, suboptions.get(i).getName(), i + 2, suboptions.get(i+1).getName());
 				} catch (Exception e) {
 					System.out.printf("%d) %s", i + 1, suboptions.get(i).getName());
 				}
+
 				System.out.println();
 			}
 		}
@@ -272,6 +286,7 @@ public class ChoiceMenu {
 			
 			if(inputMode.equals("free")) {
 				displayFreeMode();
+
 				while (input > inputRange[1] || input < inputRange[0]) {
 					if(ranBefore){
 						MenuUtils.clear();
@@ -280,6 +295,7 @@ public class ChoiceMenu {
 						System.out.println("Invalid input, try again.");
 						displayFreeMode();
 					}
+
 					while(!scanner.hasNextInt()){
 						MenuUtils.clear();
 						display();
@@ -288,6 +304,7 @@ public class ChoiceMenu {
 						displayFreeMode();
 						scanner.next();
 					}
+
 					ranBefore = true;
 					input = scanner.nextInt() - 1;
 				}
@@ -295,17 +312,20 @@ public class ChoiceMenu {
 				return input;
 			} else {
 				displayOptionMode();
+
 				while (input < 0 || input >= options.size()) {
 					if(ranBefore){
 						display();
 						displayOptionMode();
 						System.out.println("Invalid input, try again.");
 					}
+
 					while(!scanner.hasNextInt()){
 						displayOptionMode();
 						System.out.println("Invalid input, try again.");
 						scanner.next();
 					}
+					
 					ranBefore = true;
 					input = scanner.nextInt() - 1;
 				}

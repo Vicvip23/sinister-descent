@@ -1,4 +1,3 @@
 package com.sinisterorder.item;
 
-public class Item extends GenericItem{
-}
+public class Item extends GenericItem {}

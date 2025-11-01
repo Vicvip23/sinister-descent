@@ -1,7 +1,6 @@
 package com.sinisterorder.app;
 
 import com.sinisterorder.entity.Entity;
-import com.sinisterorder.entity.npc.Npc;
 import com.sinisterorder.entity.npc.NpcFactory;
 import com.sinisterorder.entity.player.Player;
 import com.sinisterorder.scene.scenes.*;

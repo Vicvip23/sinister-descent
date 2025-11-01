@@ -1,7 +1,6 @@
 package com.sinisterorder.entity.npc;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.sinisterorder.attack.Attack;
 import com.sinisterorder.attack.AttackFactory;
@@ -10,11 +9,10 @@ import com.sinisterorder.entity.Entity;
 import com.sinisterorder.inventory.Inventory;
 import com.sinisterorder.otherutils.RandomUtils;
 
-public class Npc extends Entity{
+public class Npc extends Entity {
 
 	private String lastAction;
 	private String[] uniqueAttackIds;
-	private static Random random = new Random();
 
 	public Npc() {
 		createInventory();
@@ -30,6 +28,7 @@ public class Npc extends Entity{
 
 	@Override
 	public void attack(Entity target) {
+
 		if(this.health < this.maxHealth * 0.2 && RandomUtils.chance(5)) {
 			this.health += (this.maxHealth * 0.2);
 			lastAction = this.name + " has healed its wounds! (recovered " + (this.maxHealth * 0.2) + " health.)";
@@ -43,9 +42,11 @@ public class Npc extends Entity{
 			}
 
 			if(inventory.weaponManager.getEquippedWeapon() != null) {
+
 				for (String attackId : AttacksetFactory.fromJson(inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
 					availableAttacks.add(AttackFactory.fromJson(attackId));
 				}
+
 				for (String attackId : inventory.weaponManager.getEquippedWeapon().getUniqueAttacks()) {
 					availableAttacks.add(AttackFactory.fromJson(attackId));	
 				}
@@ -56,6 +57,7 @@ public class Npc extends Entity{
 			}
 
 			Attack attack = (Attack) RandomUtils.rollByWeight(availableAttacks.toArray(new Attack[availableAttacks.size()]));
+
 			if(attack.getAttackId().equals("nothing")) {
 				lastAction = name + " is moping around.";
 			} else {

@@ -26,7 +26,6 @@ public class Inventory {
 	}
 
 	public class ItemManager implements InventoryManagerInterface {
-
 		private ArrayList<GenericItem> items = new ArrayList<GenericItem>();
 
 		public ArrayList<GenericItem> list() {
@@ -44,14 +43,16 @@ public class Inventory {
 		public Item get(int index) {
 			return (Item) items.get(index);
 		}
-		public ArrayList<Integer> get(String itemId){
+
+		public ArrayList<Integer> get(String itemId) {
 			ArrayList<Integer> listInt = new ArrayList<Integer>();
 
-			for(int i = 0; i< items.size(); i++){
+			for(int i = 0; i< items.size(); i++) {
 				if(items.get(i).getId().equals(itemId)) {
 					listInt.add(i);
 				}
 			}
+
 			return listInt;
 		}
 
@@ -60,7 +61,8 @@ public class Inventory {
 		}
 
 		public void remove(String itemId) {
-			for(int i = 0; i<items.size(); i++){
+
+			for(int i = 0; i<items.size(); i++) {
 				if(items.get(i).getId().equals(itemId)) {
 					items.remove(i);
 					break;
@@ -70,17 +72,18 @@ public class Inventory {
 		}
 
 		public void remove(String itemId, int amount) {
-			for(int i = items.size() - 1; i >= 0 && amount > 0; --i, --amount){
+
+			for(int i = items.size() - 1; i >= 0 && amount > 0; --i, --amount) {
 				if(items.get(i).getId().equals(itemId)) {
 					items.remove(i);
 				}
 			}
+
 		}
 
 	}
 
 	public class WeaponManager implements InventoryManagerInterface {
-
 		private ArrayList<GenericItem> weapons = new ArrayList<GenericItem>();
 		private Weapon equippedWeapon;
 
@@ -100,14 +103,15 @@ public class Inventory {
 			return (Weapon) weapons.get(index);
 		}
 
-		public ArrayList<Integer> get(String weaponId){
+		public ArrayList<Integer> get(String weaponId) {
 			ArrayList<Integer> listInt = new ArrayList<Integer>();
 
-			for(int i = 0; i< weapons.size(); i++){
+			for(int i = 0; i< weapons.size(); i++) {
 				if(weapons.get(i).getId().equals(weaponId)) {
 					listInt.add(i);
 				}
 			}
+
 			return listInt;
 		}
 
@@ -116,20 +120,24 @@ public class Inventory {
 		}
 
 		public void remove(String weaponId) {
-			for(int i = 0; i<weapons.size(); i++){
+
+			for(int i = 0; i<weapons.size(); i++) {
 				if(weapons.get(i).getId().equals(weaponId)) {
 					weapons.remove(i);
 					break;
 				}
 			}
+
 		}
 
 		public void remove(String weaponId, int amount) {
-			for(int i = weapons.size() - 1; i >= 0 && amount > 0; --i, --amount){
+
+			for(int i = weapons.size() - 1; i >= 0 && amount > 0; --i, --amount) {
 				if(weapons.get(i).getId().equals(weaponId)) {
 					weapons.remove(i);
 				}
 			}
+
 		}
 
 		public void equip(int weaponIndex) {
@@ -143,13 +151,13 @@ public class Inventory {
 				equippedWeapon = null;
 			}
 		}
+
 		public Weapon getEquippedWeapon() {
 			return equippedWeapon;
 		}
 	}
 
 	public class ConsumableManager implements InventoryManagerInterface {
-
 		private ArrayList<GenericItem> consumables = new ArrayList<GenericItem>();
 
 		public ArrayList<GenericItem> list() {
@@ -159,6 +167,7 @@ public class Inventory {
 		public void use(int index) {
 			Consumable temp = (Consumable) consumables.get(index);
 			temp.use();
+
 			if(temp.getUses() == 0) {
 				consumables.remove(index);
 			}
@@ -179,11 +188,12 @@ public class Inventory {
 		public ArrayList<Integer> get(String consumableId) {
 			ArrayList<Integer> listInt = new ArrayList<Integer>();
 
-			for(int i = 0; i< consumables.size(); i++){
+			for(int i = 0; i< consumables.size(); i++) {
 				if(consumables.get(i).getId().equals(consumableId)) {
 					listInt.add(i);
 				}
 			}
+
 			return listInt;
 		}
 
@@ -192,20 +202,24 @@ public class Inventory {
 		}
 
 		public void remove(String consumableId) {
+
 			for(int i = 0; i<consumables.size(); i++){
 				if(consumables.get(i).getId().equals(consumableId)) {
 					consumables.remove(i);
 					break;
 				}
 			}
+
 		}
 
 		public void remove(String consumableId, int amount) {
+
 			for(int i = consumables.size() - 1; i >= 0 && amount > 0; --i, --amount){
 				if(consumables.get(i).getId().equals(consumableId)) {
 					consumables.remove(i);
 				}
 			}
+
 		}
 
 		public void printAll() {
