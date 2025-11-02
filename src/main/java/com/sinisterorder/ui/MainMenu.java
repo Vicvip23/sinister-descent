@@ -6,7 +6,7 @@ public abstract class MainMenu {
 	private static ChoiceMenu menu;
 
 	public static void run() {
-		//MenuUtils.openingPoem();
+		MenuUtils.openingPoem();
 		buildMenu();
 		menu.run();
 	}
