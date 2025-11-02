@@ -17,6 +17,7 @@ public abstract class Game {
 		Player player = new Player();
 		Battle battle = new Battle();
 		shop.setClient(player);
+		player.inventory.purseManager.addMoney(10);
 
 		MainMenu.run();
 		
