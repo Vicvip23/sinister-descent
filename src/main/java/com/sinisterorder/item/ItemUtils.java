@@ -15,32 +15,8 @@ public class ItemUtils {
 		consumable
 	};
 
-	// Item index for item pools
-	public static final String[] itemIdList = {
-		// 0
-		"test_item",
-		// 1
-		"weathered_gold"
-	};
-
-	// Weapon index for weapon pools
-	public static final String[] weaponIdList = {
-		// 0
-		"test_weapon",
-		// 1
-		"wooden_stick"
-	};
-
-	// Consumable index for consumable pools
-	public static final String[] consumableIdList = {
-		// 0
-		"test_potion",
-		// 1
-		"small_health_potion"
-	};
-
 	// Generate random items from pool
-	// TODO: Rework to support weighted randomness
+	// TODO: Rework to support weighed randomness
 	public static Item[] generateBattleDrops(Entity killed) {
 		String[] possibleDrops = killed.getDrops();
 		ArrayList<GenericItem> drops = new ArrayList<>();
@@ -55,4 +31,33 @@ public class ItemUtils {
 		output = drops.toArray(output); 
 		return output;
 	}
+
+
+
+	// Item index for item pools
+	public static final String[] itemIdList = {
+		// --
+		// "test_item",
+
+		// 0
+		"weathered_gold"
+	};
+
+	// Weapon index for weapon pools
+	public static final String[] weaponIdList = {
+		// --
+		// "test_weapon",
+
+		// 0
+		"wooden_stick"
+	};
+
+	// Consumable index for consumable pools
+	public static final String[] consumableIdList = {
+		// --
+		// "test_potion",
+
+		// 0
+		"small_health_potion"
+	};
 }
