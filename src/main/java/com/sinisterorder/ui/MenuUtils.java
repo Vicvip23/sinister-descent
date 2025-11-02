@@ -1,7 +1,10 @@
 package com.sinisterorder.ui;
 
-public class MenuUtils {
-	static public final String inventoryArt = """	
+// Helper class for additional menu related needs
+public abstract class MenuUtils {
+
+	// Inventory menu art
+	static public final String inventoryArt = """
 		 @@@@@@               @@@@@-
 		 @@  @@@@@@@@@@@@@@@@@@@  @%
 		 @@  @@               @@  @%
@@ -17,6 +20,7 @@ public class MenuUtils {
 
 
 
+	// Main menu fancy title text
 	static public final String titleText = """
 		   _________.__       .__          __                 ________                                     __   
 		  /   _____/|__| ____ |__| _______/  |_  ___________  \\______ \\   ____   ______ ____  ____   _____/  |_ 
@@ -26,6 +30,7 @@ public class MenuUtils {
 		         \\/         \\/        \\/            \\/                \\/     \\/     \\/     \\/    \\/     \\/""";
 
 
+	// Game over screen skull art
 	static public final String skullArt = """                                    
                       ############                      
                    #####        #####                   
@@ -43,6 +48,7 @@ public class MenuUtils {
                      ##############""";
 
 
+	// ANSI escape sequence to clear terminal
 	static public void clear() {
 		System.out.print("\033\143");
 	}
@@ -51,6 +57,7 @@ public class MenuUtils {
 		System.out.println("\n==============================");
 	}
 
+	// Print message with delay between symbols
 	static private void printWithDelay(String text, int delay) {
 
 		for (char symbol : text.toCharArray()) {
@@ -59,6 +66,7 @@ public class MenuUtils {
 		}
 	}
 
+	// Wrapper method for Thread.sleep to avoid doing try catch every time
 	static public void wait(int delay) {
 		
 		try {
@@ -68,6 +76,7 @@ public class MenuUtils {
 		}
 	}
 
+	// Method to start opening poem cutscene
 	static protected void openingPoem() {
 		clear();
 		printWithDelay("Legends of old\n", 100);
@@ -87,5 +96,5 @@ public class MenuUtils {
 		clear();
 		printWithDelay("\033[0;1mSinister Descent.\033[0;0m", 150);
 		wait(250);
-	};
+	}
 }

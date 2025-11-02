@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 import com.google.gson.Gson;
 
+// Helper class for manual and from json menu creation
 public abstract class MenuFactory {
 	static private Gson gson = new Gson();
 	static private FileReader reader;
@@ -16,7 +17,7 @@ public abstract class MenuFactory {
 		return new ChoiceMenu(menuId, menuTitle);
 	}
 	
-	static public ChoiceMenu createFromJson(String menuId) {
+	static public ChoiceMenu fromJson(String menuId) {
 
 		try {
 			reader = new FileReader("src/main/resources/menu/" + menuId + "/root.json");

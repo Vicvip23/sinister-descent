@@ -1,5 +1,7 @@
 package com.sinisterorder.ui;
 
+// Simple helper class to hold ChoiceMenu labels
+// TODO: Can probably change all the methods to protected, should double check later
 public class Label {
 	private String labelId;
 	private String text;

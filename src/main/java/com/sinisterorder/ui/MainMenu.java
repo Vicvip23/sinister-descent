@@ -1,6 +1,8 @@
 package com.sinisterorder.ui;
 
-public class MainMenu {
+// Helper class to play the starting sequence and display the main menu
+// Define class as abstract to prevent instancing
+public abstract class MainMenu {
 	private static ChoiceMenu menu;
 
 	public static void run() {
@@ -10,13 +12,13 @@ public class MainMenu {
 	}
 
 	private static void buildMenu() {
-		menu = MenuFactory.createFromJson("main_menu");
+		menu = MenuFactory.fromJson("main_menu");
 
 		menu.addLabel("title", MenuUtils.titleText);
 
-		menu.addAction("start", () -> {});
+		menu.setAction("start", () -> {});
 
-		menu.addAction("exit", () -> {
+		menu.setAction("exit", () -> {
 			System.out.println("See you next time.");
 			System.exit(0);
 		});
