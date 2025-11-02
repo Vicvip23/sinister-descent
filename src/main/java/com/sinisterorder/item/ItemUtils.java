@@ -8,12 +8,14 @@ import com.sinisterorder.entity.Entity;
 public class ItemUtils {
 	private static Random random = new Random();
 
+	// Helper enum
 	public static enum ItemType {
 		item,
 		weapon,
 		consumable
 	};
 
+	// Item index for item pools
 	public static final String[] itemIdList = {
 		// 0
 		"test_item",
@@ -21,6 +23,7 @@ public class ItemUtils {
 		"weathered_gold"
 	};
 
+	// Weapon index for weapon pools
 	public static final String[] weaponIdList = {
 		// 0
 		"test_weapon",
@@ -28,6 +31,7 @@ public class ItemUtils {
 		"wooden_stick"
 	};
 
+	// Consumable index for consumable pools
 	public static final String[] consumableIdList = {
 		// 0
 		"test_potion",
@@ -35,6 +39,8 @@ public class ItemUtils {
 		"small_health_potion"
 	};
 
+	// Generate random items from pool
+	// TODO: Rework to support weighted randomness
 	public static Item[] generateBattleDrops(Entity killed) {
 		String[] possibleDrops = killed.getDrops();
 		ArrayList<GenericItem> drops = new ArrayList<>();

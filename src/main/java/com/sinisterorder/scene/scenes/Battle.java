@@ -45,14 +45,16 @@ public class Battle extends Scene{
 		}
 	};
 
+	// Method to generate all battle menu data
 	private void buildMenu(boolean displayEnemyAction) {
 		battleMenu = MenuFactory.create("battle", "Battle");
 
-		battleMenu.addLabel("battle_enemy_header", "A " + enemy.getName() + " Approaches!\n");
-		battleMenu.addLabel("battle_enemy_info", String.format("%s: %d\t %s: %d\n", "Health", enemy.getHealth(), "Armor", enemy.getArmor()));
+		battleMenu.addLabel("battle_enemy_header", "A " + enemy.getName() + " Approaches!\n"); // A {enemy name} Approaches!
+		battleMenu.addLabel("battle_enemy_info", String.format("%s: %d\t %s: %d\n", "Health", enemy.getHealth(), "Armor", enemy.getArmor())); // Enemy health and armor display
 		battleMenu.addLabel("battle_player_header", "\nYour Stats\n");
-		battleMenu.addLabel("battle_player_info", String.format("%s: %d\t %s: %d\n", "Health", player.getHealth(), "Armor", player.getArmor()));
+		battleMenu.addLabel("battle_player_info", String.format("%s: %d\t %s: %d\n", "Health", player.getHealth(), "Armor", player.getArmor())); // Player health and armor display
 
+		// Add last enemy action if it exists and is enabled
 		if(enemy.getLastAction() != null && displayEnemyAction) {
 			battleMenu.addLabel("enemy_action", enemy.getLastAction() + "\n");
 		}
@@ -61,19 +63,22 @@ public class Battle extends Scene{
 			player.attack(enemy);
 		});
 
+		// Open player inventory with blocked sell option
 		battleMenu.createOption("inventory", "Open inventory", () -> {
 			player.startInventoryManagerUi(false);
 		});
 	}
 
+	// Battle end screen
 	private void buildEndMenu() {
 		battleMenu = MenuFactory.create("battle", "Battle");
 
-		battleMenu.addLabel("battle_flavor", enemy.getName() + " Has Been Defeated!\n");
+		battleMenu.addLabel("battle_flavor", enemy.getName() + " Has Been Defeated!\n"); // {enemy name} Has Been Defeated!
 		battleMenu.addLabel("battle_drops_header", "Obtained items:\n\n");
 
 		GenericItem[] drops = ItemUtils.generateBattleDrops(enemy);
 
+		// If there's drops, display them
 		if(drops != null) {
 			for (GenericItem item : drops) {
 				battleMenu.addLabel("drop_" + item.getId(), String.format("%s\n", item.getName()));

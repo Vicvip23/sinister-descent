@@ -4,6 +4,7 @@ import com.sinisterorder.item.GenericItem;
 
 import java.util.ArrayList;
 
+// Not *really* needed but nice for ensuring inventory managers have what they need
 public interface InventoryManagerInterface {
 
 	public ArrayList<GenericItem> list();

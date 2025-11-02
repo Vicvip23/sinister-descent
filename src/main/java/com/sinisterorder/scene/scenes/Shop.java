@@ -34,6 +34,7 @@ public class Shop extends Scene{
 		this.client = client;
 	}
 
+	// Main shop loop
 	public void run() {
 		run = true;
 		generateInventory();
@@ -44,6 +45,7 @@ public class Shop extends Scene{
 		}
 	}
 
+	// Fill shop with content
 	private void generateInventory() {
 		inventory.wipe();
 
@@ -57,11 +59,11 @@ public class Shop extends Scene{
 	}
 
 	private void buildMenu() {
-
 		shopMenu = MenuFactory.create("shop_menu", "Shop");
 
 		shopMenu.addLabel("welcome", "Welcome to the shop.\n");
 
+		// Random flavor text
 		flavor = random.nextInt(3);
 		switch (flavor) {
 			case 0:
@@ -77,6 +79,9 @@ public class Shop extends Scene{
 
 		shopMenu.addLabel("section_weapons", "\nOur weapons for sale:\n");
 
+		// Funky i shenanigans for formatting; 3 entries per row
+		//
+		// Lord of the rings: The return of the evil i
 		for (int i = 1; i <= this.inventory.weaponManager.list().size(); ++i) {
 			if(i % 3 == 0 && i != this.inventory.weaponManager.list().size()) {
 				shopMenu.addLabel("" + i, String.format("%d. %s // %d\n", i, this.inventory.weaponManager.get(i - 1).getName(), this.inventory.weaponManager.get(i - 1).getValue()));
@@ -87,6 +92,7 @@ public class Shop extends Scene{
 
 		shopMenu.addLabel("section_consumables", "\nOur consumables for sale:\n");
 
+		// I swear this for loop is everywhere (this should probably be its own method now that I think about it)
 		for (int i = 1; i <= this.inventory.consumableManager.list().size(); ++i) {
 			if(i % 3 == 0 && i != this.inventory.consumableManager.list().size()) {
 				shopMenu.addLabel("" + i, String.format("%d. %s // %d\n", i, this.inventory.consumableManager.get(i - 1).getName(), this.inventory.consumableManager.get(i - 1).getValue()));
@@ -95,10 +101,12 @@ public class Shop extends Scene{
 			}
 		}
 
+		// Buy weapon option
 		shopMenu.createOption("buy_weapon", "Purchase weapon", () -> {
 			shopMenu.createQuery("item_selector", "What'd ya like to buy, kid?", "free", 0, inventory.weaponManager.list().size() - 1);
 			int selectedItem = shopMenu.query.run();
 
+			// Random flavor text if chosen item is too expensive
 			if(inventory.weaponManager.get(selectedItem).getValue() > client.inventory.purseManager.getMoney()) {
 				
 				flavor = random.nextInt(3);
@@ -116,6 +124,7 @@ public class Shop extends Scene{
 
 				MenuUtils.wait(1000);
 			} else {
+				// Buy logic
 				client.inventory.weaponManager.add(inventory.weaponManager.get(selectedItem));
 				client.inventory.purseManager.removeMoney(inventory.weaponManager.get(selectedItem).getValue());
 				inventory.weaponManager.remove(selectedItem);
@@ -124,6 +133,7 @@ public class Shop extends Scene{
 			}
 		});
 
+		// Buy consumable option (exact copy of buy weapon)
 		shopMenu.createOption("buy_consumable", "Purchase consumable", () -> {
 			shopMenu.createQuery("item_selector", "What'd ya like to buy, kid?", "free", 0, inventory.consumableManager.list().size() - 1);
 			int selectedItem = shopMenu.query.run();
@@ -157,6 +167,7 @@ public class Shop extends Scene{
 			client.startInventoryManagerUi(true);
 		});
 
+		// The weird ANSI escape sequences are there to make the text bold
 		shopMenu.createOption("continue", "\033[0;1mDescend.\033[0;0m", () -> {
 			run = false;
 		});

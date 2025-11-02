@@ -4,6 +4,7 @@ import com.sinisterorder.handler.LevelHandler;
 import com.sinisterorder.handler.RandomChoiceByWeightInterface;
 import com.sinisterorder.item.ItemUtils.ItemType;
 
+// Framework for all other items
 public class GenericItem implements LevelHandler, RandomChoiceByWeightInterface {
 	private String itemId;
 	private String itemName;

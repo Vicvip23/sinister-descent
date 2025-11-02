@@ -25,7 +25,7 @@ public class Player extends Entity {
 	}
 
 	public void startInventoryManagerUi(boolean unlockSell) {
-		runPrimary = true;
+		runPrimary = true; // Use boolean variables to circumvent lambdas not being able to break out of loops
 		this.unlockSell = unlockSell;
 		playerMenu.fullWipe();
 
@@ -33,31 +33,37 @@ public class Player extends Entity {
 			playerMenu.setTitle("Your Inventory");
 			playerMenu.addLabel("inventory_art", MenuUtils.inventoryArt);
 
+			// Ensure equipped weapon is accounted for in main inventory menu item tally
 			if(inventory.weaponManager.getEquippedWeapon() == null) {
 				playerMenu.addLabel("balance1", "\nWeapons: " + inventory.weaponManager.list().size());
 			} else {
 				playerMenu.addLabel("balance1", "\nWeapons: " + (inventory.weaponManager.list().size() + 1));
 			}
 
+			// Item tallies
 			playerMenu.addLabel("balance2", "\nConsumables: " + inventory.consumableManager.list().size());
 			playerMenu.addLabel("balance3", "\nItems: " + inventory.itemManager.list().size());
 			playerMenu.addLabel("balance4", "\nBalance: " + inventory.purseManager.getMoney());
 
+			// Weapon menu
 			playerMenu.createOption("weapon_manager", "Manage weapons", () -> {
 				playerMenu.fullWipe();
 				displayWeapons();
 			});
 
+			// Consumable menu
 			playerMenu.createOption("consumable_manager", "Manage consumables", () -> {
 				playerMenu.fullWipe();
 				displayConsumables();
 			});
 
+			// Misc item menu
 			playerMenu.createOption("item_manager", "Manage misc items", () -> {
 				playerMenu.fullWipe();
 				displayItems();
 			});
 
+			// Back
 			playerMenu.createOption("return", "Return", () -> {
 				runPrimary = false;
 			});
@@ -68,17 +74,20 @@ public class Player extends Entity {
 	}
 
 	private void displayWeapons() {
-		runSecondary = true;
+		runSecondary = true; // Use boolean variables to circumvent lambdas not being able to break out of loops
 
 		while(runSecondary) {
 			playerMenu.setTitle("Weapons in inventory");
 
+			// No equipped weapon handling
 			if(inventory.weaponManager.getEquippedWeapon() == null) {
 				playerMenu.addLabel("equipped", String.format("%s: %s\n", "Equipped weapon", "none"));
 			} else {
 				playerMenu.addLabel("equipped", String.format("%s: %s\n", "Equipped weapon", inventory.weaponManager.getEquippedWeapon().getName()));
 			}
 
+			// Display all items in category, formatted 3 per row
+			// Funky i value shenanigans... (needed for formatting)
 			for (int i = 1; i <= this.inventory.weaponManager.list().size(); ++i) {
 				if(i % 3 == 0 && i != this.inventory.weaponManager.list().size()) {
 					playerMenu.addLabel("" + i, String.format("%d. %s\n", i, this.inventory.weaponManager.get(i - 1).getName()));
@@ -87,7 +96,10 @@ public class Player extends Entity {
 				}
 			}
 
+			// Options to block if no items remain in inventory section
 			if(inventory.weaponManager.list().size() > 0) {
+
+				// Display a menu with more info about chosen item
 				playerMenu.createOption("more_info", "More info", () -> {
 					playerMenu.createQuery("item_selector", "Input which weapon you'd like more information about", "free", 0, inventory.weaponManager.list().size() - 1);
 					
@@ -95,6 +107,9 @@ public class Player extends Entity {
 					playerMenu.fullWipe();
 					playerMenu.setTitle("Details");
 
+					// Format a label containing all relevant information
+					//
+					// Bigger string format
 					playerMenu.addLabel("", String.format("Name: %s\nSell value: %d\nDamage: %d\nLevel: %d\nDescription: %s", 
 						inventory.weaponManager.get(selectedItem).getName(),
 						inventory.weaponManager.get(selectedItem).getValue() / 2,
@@ -107,6 +122,7 @@ public class Player extends Entity {
 					playerMenu.run();
 				});
 
+				// Equip a chosen weapon
 				playerMenu.createOption("equip", "Equip", () -> {
 					playerMenu.createQuery("item_selector", "Input which weapon you'd like to equip", "free", 0, inventory.weaponManager.list().size() - 1);
 					
@@ -114,10 +130,13 @@ public class Player extends Entity {
 					this.inventory.weaponManager.equip(selectedItem);
 				});
 
+				// Unequip option
 				playerMenu.createOption("unequip", "Unequip", () -> {
 					this.inventory.weaponManager.unequip();
 				});
 
+				// Only make sell available under unlocked condition
+				// Sell option
 				if(unlockSell) {
 					playerMenu.createOption("sell", "Sell weapon", () -> {
 						playerMenu.createQuery("item_selector", "Input which weapon you'd like to sell", "free", 0, inventory.weaponManager.list().size() - 1);
@@ -139,12 +158,14 @@ public class Player extends Entity {
 		}
 	}
 	
+	// Same as displayWeapons(), everything just calls inventory.itemManager instead...
 	private void displayItems() {
-		runSecondary = true;
+		runSecondary = true; // Use boolean variables to circumvent lambdas not being able to break out of loops
 
 		while(runSecondary) {
 			playerMenu.setTitle("Misc items in inventory");
 
+			// More evil funky i shenanigans
 			for (int i = 1; i <= this.inventory.itemManager.list().size(); ++i) {
 				if(i % 3 == 0 && i != this.inventory.itemManager.list().size()) {
 					playerMenu.addLabel("" + i, String.format("%d. %s\n", i, this.inventory.itemManager.get(i - 1).getName()));
@@ -153,6 +174,7 @@ public class Player extends Entity {
 				}
 			}
 
+			// Block options when no items, same as before
 			if(inventory.itemManager.list().size() > 0) {
 				playerMenu.createOption("more_info", "More info", () -> {
 					playerMenu.createQuery("item_selector", "Input which item you'd like more information about", "free", 0, inventory.itemManager.list().size() - 1);
@@ -161,6 +183,7 @@ public class Player extends Entity {
 					playerMenu.fullWipe();
 					playerMenu.setTitle("Details");
 
+					// Big string format
 					playerMenu.addLabel("", String.format("Name: %s\nSell value: %d\nLevel: %d\nDescription: %s", 
 						inventory.itemManager.get(selectedItem).getName(),
 						inventory.itemManager.get(selectedItem).getValue() / 2,
@@ -192,12 +215,17 @@ public class Player extends Entity {
 		}
 	}
 
+	// Same as the two previous methods, except this one calls inventory.consumableManager...
 	private void displayConsumables() {
-		runSecondary = true;
+		runSecondary = true; // Use boolean variables to circumvent lambdas not being able to break out of loops
 
 		while(runSecondary) {
 			playerMenu.setTitle("Consumables in inventory");
 
+			// This i trick seems to be a recurring theme...
+			//
+			// "Oh boy! I can't wait to read the code of Player.java in the sinister-descent project!"
+			// The evil and intimidating i:
 			for (int i = 1; i <= this.inventory.consumableManager.list().size(); ++i) {
 				if(i % 3 == 0 && i != this.inventory.consumableManager.list().size()) {
 					playerMenu.addLabel("" + i, String.format("%d. %s\n", i, this.inventory.consumableManager.get(i - 1).getName()));
@@ -206,6 +234,7 @@ public class Player extends Entity {
 				}
 			}
 
+			// Blocked if no consumables
 			if(inventory.consumableManager.list().size() > 0) {
 				playerMenu.createOption("more_info", "More info", () -> {
 					playerMenu.createQuery("item_selector", "Input which consumable you'd like more information about", "free", 0, inventory.consumableManager.list().size() - 1);
@@ -214,6 +243,7 @@ public class Player extends Entity {
 					playerMenu.fullWipe();
 					playerMenu.setTitle("Details");
 
+					// The biggest string format
 					playerMenu.addLabel("", String.format("Name: %s\nSell value: %d\nEffect description: %s\nUses left: %d\nLevel: %d\nDescription: %s", 
 						inventory.consumableManager.get(selectedItem).getName(),
 						inventory.consumableManager.get(selectedItem).getValue() / 2,
@@ -227,6 +257,8 @@ public class Player extends Entity {
 					playerMenu.run();
 				});
 
+				// TODO: Implement full consumable functionality besides just decreasing available uses (add effects)
+				// Use option. Removes uses.
 				playerMenu.createOption("use", "Use consumable", () -> {
 					playerMenu.createQuery("item_selector", "Input which consumable you'd like to use", "free", 0, inventory.consumableManager.list().size() - 1);
 					
@@ -254,10 +286,12 @@ public class Player extends Entity {
 		}
 	}
 
+	// Menu for handling player attacks
 	@Override
 	public void attack(Entity target) {
 		ArrayList<Attack> availableAttacks = new ArrayList<>();
 
+		// No equipped weapon handling
 		if(inventory.weaponManager.getEquippedWeapon() != null) {
 
 			for (String attackId : AttacksetFactory.fromJson(inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
@@ -269,7 +303,7 @@ public class Player extends Entity {
 			}
 
 		} else {
-			inventory.weaponManager.add("fist");
+			inventory.weaponManager.add("fist"); // Epic fist fight
 			inventory.weaponManager.equip(0);
 			availableAttacks.add(AttackFactory.fromJson("punch"));
 		}
@@ -279,16 +313,17 @@ public class Player extends Entity {
 		playerMenu.fullWipe();
 		playerMenu.setTitle("Attacks");
 
+		// Return of the evil i...
+		// Winner of most confusing for loop contest 2025! (fake)
 		for (int i = 1; i <= availableAttacks.size(); ++i) {
-
 			if(i % 3 == 0 && i != availableAttacks.size()) {
 				playerMenu.addLabel("" + i, String.format("%d. %s\n", i, availableAttacks.get(i - 1).getAttackName()));
 			} else {
 				playerMenu.addLabel("" + i, String.format("%d. %s\t", i, availableAttacks.get(i - 1).getAttackName()));
 			}
-
 		}
 
+		// Option to pick an attack
 		playerMenu.createOption("pick_attack", "Choose attack", () -> {
 			Attack attack = availableAttacks.get(playerMenu.query.run());
 			int damage = (int) (this.inventory.weaponManager.getEquippedWeapon().getDamage() * attack.getAttackMultiplier()) - (target.getArmor() / 2);
@@ -298,6 +333,8 @@ public class Player extends Entity {
 		playerMenu.run();
 	}
 
+	// Only here because it's required because of Entity definition...
+	// MAYBE will have functionality in the future but for now PLEASE DO NOT USE ^-^
 	@Override
 	public String getLastAction() {
 		return null;

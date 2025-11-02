@@ -67,10 +67,12 @@ public abstract class Entity implements EntityDamageHandler{
 	public void setHealth(int amnt) {
 		health = amnt;
 
+		// Make sure there's no health overflow
 		if(health > maxHealth) {
 			health = maxHealth;
 		};
 
+		// Disallow setting of negative health
 		if(health < 0) {
 			health = 0;
 		}
@@ -80,7 +82,8 @@ public abstract class Entity implements EntityDamageHandler{
 		return this.drops;
 	}
 
+	// These two are required by Battle scene implementation
+	// Allows for *relatively* easy local multiplayer implementation though! (VS mode)
 	public abstract void attack(Entity target);
-
 	public abstract String getLastAction();
 }

@@ -5,6 +5,7 @@ import com.sinisterorder.item.*;
 
 import java.util.ArrayList;
 
+// Seems big until you realize it's all getters, setters and nearly identical managers.
 public class Inventory {
 	public ItemManager itemManager;
 	public WeaponManager weaponManager;
@@ -25,6 +26,7 @@ public class Inventory {
 		consumableManager.consumables.clear();
 	}
 
+	// Subclass for managing misc items
 	public class ItemManager implements InventoryManagerInterface {
 		private ArrayList<GenericItem> items = new ArrayList<GenericItem>();
 
@@ -44,6 +46,7 @@ public class Inventory {
 			return (Item) items.get(index);
 		}
 
+		// TODO: Rework pointless method (istg how did I miss this when reviewing this)
 		public ArrayList<Integer> get(String itemId) {
 			ArrayList<Integer> listInt = new ArrayList<Integer>();
 
@@ -56,21 +59,22 @@ public class Inventory {
 			return listInt;
 		}
 
+		// TODO: add out of bounds check
 		public void remove(int index) {
 			items.remove(index);
 		}
 
 		public void remove(String itemId) {
 
-			for(int i = 0; i<items.size(); i++) {
+			for(int i = 0; i < items.size(); i++) {
 				if(items.get(i).getId().equals(itemId)) {
 					items.remove(i);
 					break;
 				}
 			}
-
 		}
 
+		// Remove given amount of items with given ID
 		public void remove(String itemId, int amount) {
 
 			for(int i = items.size() - 1; i >= 0 && amount > 0; --i, --amount) {
@@ -78,11 +82,10 @@ public class Inventory {
 					items.remove(i);
 				}
 			}
-
 		}
-
 	}
 
+	// Not going into detail with methods shared with ItemManager
 	public class WeaponManager implements InventoryManagerInterface {
 		private ArrayList<GenericItem> weapons = new ArrayList<GenericItem>();
 		private Weapon equippedWeapon;
@@ -103,6 +106,7 @@ public class Inventory {
 			return (Weapon) weapons.get(index);
 		}
 
+		// TODO: Another pointless method to rework
 		public ArrayList<Integer> get(String weaponId) {
 			ArrayList<Integer> listInt = new ArrayList<Integer>();
 
@@ -127,7 +131,6 @@ public class Inventory {
 					break;
 				}
 			}
-
 		}
 
 		public void remove(String weaponId, int amount) {
@@ -137,14 +140,15 @@ public class Inventory {
 					weapons.remove(i);
 				}
 			}
-
 		}
 
+		// Set equipped weapon and remove it from inventory contents
 		public void equip(int weaponIndex) {
 			equippedWeapon = (Weapon) weapons.get(weaponIndex);
 			weapons.remove(weaponIndex);
 		}
 
+		// Remove equipped weapon and put it back in inventory
 		public void unequip() {
 			if(equippedWeapon != null) {
 				weapons.add(equippedWeapon);
@@ -157,6 +161,7 @@ public class Inventory {
 		}
 	}
 
+	// Not going into detail with methods shared with ItemManager
 	public class ConsumableManager implements InventoryManagerInterface {
 		private ArrayList<GenericItem> consumables = new ArrayList<GenericItem>();
 
@@ -164,6 +169,7 @@ public class Inventory {
 			return consumables;
 		}
 
+		// Reduces amount of uses of given consumable and deletes it if uses are 0
 		public void use(int index) {
 			Consumable temp = (Consumable) consumables.get(index);
 			temp.use();
@@ -185,6 +191,7 @@ public class Inventory {
 			return (Consumable) consumables.get(index);
 		}
 
+		// TODO: Rework pointless method
 		public ArrayList<Integer> get(String consumableId) {
 			ArrayList<Integer> listInt = new ArrayList<Integer>();
 
@@ -209,7 +216,6 @@ public class Inventory {
 					break;
 				}
 			}
-
 		}
 
 		public void remove(String consumableId, int amount) {
@@ -219,7 +225,6 @@ public class Inventory {
 					consumables.remove(i);
 				}
 			}
-
 		}
 
 		public void printAll() {
@@ -229,6 +234,8 @@ public class Inventory {
 		}
 	}
 
+	// Simple money handling
+	// TODO: ensure money can't go negative
 	public class PurseManager {
 		private int money;
 

@@ -5,11 +5,11 @@ import java.io.FileReader;
 import com.google.gson.Gson;
 
 public class ItemFactory {
-	
-	static private Gson gson = new Gson();
+	private static Gson gson = new Gson();
 	private static FileReader reader;
 	
-	static public GenericItem fromJson(String itemId) {
+	// Try to read through all 3 item data files, return one with matching ID
+	public static GenericItem fromJson(String itemId) {
 		
 		try {
 			reader = new FileReader("src/main/resources/item/item.json");
@@ -44,6 +44,7 @@ public class ItemFactory {
 			e.printStackTrace();
 		}
 
+		// No item found
 		return null;
 	}
 }

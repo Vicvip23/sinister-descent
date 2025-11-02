@@ -10,7 +10,6 @@ import com.sinisterorder.inventory.Inventory;
 import com.sinisterorder.otherutils.RandomUtils;
 
 public class Npc extends Entity {
-
 	private String lastAction;
 	private String[] uniqueAttackIds;
 
@@ -26,15 +25,19 @@ public class Npc extends Entity {
 		return lastAction;
 	}
 
+	// Battle action algorithm
 	@Override
 	public void attack(Entity target) {
 
-		if(this.health < this.maxHealth * 0.2 && RandomUtils.chance(5)) {
+		// 1 in 10 chance to heal for 10% of max health if health is below 20%
+		// Otherwise pick attack at random based on their weights
+		if(this.health < this.maxHealth * 0.2 && RandomUtils.chance(10)) {
 			this.health += (this.maxHealth * 0.2);
 			lastAction = this.name + " has healed its wounds! (recovered " + (this.maxHealth * 0.2) + " health.)";
 		} else {
 			ArrayList<Attack> availableAttacks = new ArrayList<>();
 
+			// Check for any abilities unique to given entity and add them
 			if(uniqueAttackIds != null) {
 				for (String attackId : uniqueAttackIds) {
 					availableAttacks.add(AttackFactory.fromJson(attackId));
@@ -43,6 +46,7 @@ public class Npc extends Entity {
 
 			if(inventory.weaponManager.getEquippedWeapon() != null) {
 
+				// Iterate over attacks contained in equipped weapon's attackset as well as the weapon's unique attacks
 				for (String attackId : AttacksetFactory.fromJson(inventory.weaponManager.getEquippedWeapon().getAttackset()).getAttackset()) {
 					availableAttacks.add(AttackFactory.fromJson(attackId));
 				}
@@ -51,6 +55,7 @@ public class Npc extends Entity {
 					availableAttacks.add(AttackFactory.fromJson(attackId));	
 				}
 			} else {
+				// Fallback weapon and attack
 				inventory.weaponManager.add("fist");
 				inventory.weaponManager.equip(0);
 				availableAttacks.add(AttackFactory.fromJson("punch"));
@@ -58,6 +63,7 @@ public class Npc extends Entity {
 
 			Attack attack = (Attack) RandomUtils.rollByWeight(availableAttacks.toArray(new Attack[availableAttacks.size()]));
 
+			// Unique text for the "nothing" ability.
 			if(attack.getAttackId().equals("nothing")) {
 				lastAction = name + " is moping around.";
 			} else {

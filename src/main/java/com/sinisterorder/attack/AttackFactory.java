@@ -13,6 +13,7 @@ public class AttackFactory {
             FileReader reader = new FileReader("src/main/resources/attack/attack.json");
             Attack[] attacks = gson.fromJson(reader, Attack[].class);
 
+            // Search for attack with matching ID
             for (Attack attack : attacks) {
                 if(attackId.equals(attack.getAttackId())){
                     return attack;
@@ -25,6 +26,7 @@ public class AttackFactory {
             e.printStackTrace();
         }
 
+        // No attack found
         return null;
     }
 }
