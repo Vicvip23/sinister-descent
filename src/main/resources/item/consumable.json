@@ -19,6 +19,39 @@
 		"effectId": "heal",
 		"effectDescription": "Heals the user.",
 		"itemType": "consumable",
-		"usesLeft": 10
+		"usesLeft": 1
+	},
+	{
+		"itemId": "stamina_draught",
+		"itemName": "Stamina Draught",
+		"value": 20,
+		"description": "A bitter brew that restores energy.",
+		"level": 3,
+		"effectId": "restore_stamina",
+		"effectDescription": "Restores some stamina.",
+		"itemType": "consumable",
+		"usesLeft": 1
+	},
+	{
+		"itemId": "antidote_vial",
+		"itemName": "Antidote Vial",
+		"value": 25,
+		"description": "A clear liquid that neutralizes poison.",
+		"level": 4,
+		"effectId": "cure_poison",
+		"effectDescription": "Removes poison effects.",
+		"itemType": "consumable",
+		"usesLeft": 1
+	},
+	{
+		"itemId": "spicy_mushroom",
+		"itemName": "Spicy Mushroom",
+		"value": 10,
+		"description": "A red mushroom with a faint glow.",
+		"level": 2,
+		"effectId": "temp_damage_boost",
+		"effectDescription": "Temporarily increases damage dealt.",
+		"itemType": "consumable",
+		"usesLeft": 1
 	}
 ]

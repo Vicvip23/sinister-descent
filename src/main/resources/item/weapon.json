@@ -31,5 +31,49 @@
 		"damage": 2,
 		"attackset": "sword",
 		"uniqueAttacks": []
+	},
+	{
+		"itemId": "rusty_dagger",
+		"itemName": "Rusty Dagger",
+		"value": 8,
+		"description": "A small, corroded blade. Still sharp enough to cut.",
+		"itemType": "weapon",
+		"level": 3,
+		"damage": 3,
+		"attackset": "dagger",
+		"uniqueAttacks": []
+	},
+	{
+		"itemId": "iron_axe",
+		"itemName": "Iron Axe",
+		"value": 15,
+		"description": "A heavy chopping tool repurposed for battle.",
+		"itemType": "weapon",
+		"level": 6,
+		"damage": 5,
+		"attackset": "axe",
+		"uniqueAttacks": []
+	},
+	{
+		"itemId": "spiked_mace",
+		"itemName": "Spiked Mace",
+		"value": 20,
+		"description": "A brutal flanged mace designed to crush armor.",
+		"itemType": "weapon",
+		"level": 8,
+		"damage": 6,
+		"attackset": "mace",
+		"uniqueAttacks": []
+	},
+	{
+		"itemId": "bone_sword",
+		"itemName": "Bone Sword",
+		"value": 12,
+		"description": "A crude sword carved from the femur of a large beast.",
+		"itemType": "weapon",
+		"level": 4,
+		"damage": 4,
+		"attackset": "sword",
+		"uniqueAttacks": []
 	}
 ]

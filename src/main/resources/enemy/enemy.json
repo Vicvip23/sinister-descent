@@ -1,10 +1,34 @@
 [
 	{
-		"entityId": "test_wolf",
-		"name": "Test Wolf",
-		"maxHealth": 20,
-		"armor": 1,
+		"entityId": "wolf",
+		"name": "Wolf",
+		"maxHealth": 5,
+		"armor": 0,
 		"uniqueAttackIds": ["nothing"],
-		"drops": ["weathered_gold"]
+		"drops": ["wolf_tooth", "fur"]
+	},
+	{
+		"entityId": "giant_spider",
+		"name": "Giant Spider",
+		"maxHealth": 8,
+		"armor": 1,
+		"uniqueAttackIds": [],
+		"drops": ["spider_silk", "rusted_key"]
+	},
+	{
+		"entityId": "skeletal_guard",
+		"name": "Skeletal Guard",
+		"maxHealth": 12,
+		"armor": 2,
+		"uniqueAttackIds": [],
+		"drops": ["ancient_coin", "cracked_potion", "worn_earring"]
+	},
+	{
+		"entityId": "cursed_thief",
+		"name": "Cursed Thief",
+		"maxHealth": 10,
+		"armor": 1,
+		"uniqueAttackIds": [],
+		"drops": ["rusted_key", "ancient_coin", "weathered_gold", "blue_gem"]
 	}
 ]

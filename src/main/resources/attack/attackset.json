@@ -5,14 +5,56 @@
 			"swing"
 		]
 	},
-  {
-    "attacksetId": "fist",
-    "attackset": [
-      "punch"
-    ]
-  },
-  {
-    "attacksetId": "none",
-    "attackset": []
-  }
+	{
+		"attacksetId": "fist",
+		"attackset": [
+			"punch"
+		]
+	},
+	{
+		"attacksetId": "none",
+		"attackset": []
+	},
+	{
+		"attacksetId": "dagger",
+		"attackset": [
+			"stab",
+			"quick_slash"
+		]
+	},
+	{
+		"attacksetId": "axe",
+		"attackset": [
+			"chop",
+			"heavy_cleave"
+		]
+	},
+	{
+		"attacksetId": "mace",
+		"attackset": [
+			"bash",
+			"smash"
+		]
+	},
+	{
+		"attacksetId": "dagger",
+		"attackset": [
+			"stab",
+			"quick_slash"
+		]
+	},
+	{
+		"attacksetId": "axe",
+		"attackset": [
+			"chop",
+			"heavy_cleave"
+		]
+	},
+	{
+		"attacksetId": "mace",
+		"attackset": [
+			"bash",
+			"smash"
+		]
+	}
 ]

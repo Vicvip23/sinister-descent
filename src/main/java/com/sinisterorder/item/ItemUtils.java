@@ -40,7 +40,25 @@ public class ItemUtils {
 		// "test_item",
 
 		// 0
-		"weathered_gold"
+		"weathered_gold",
+		// 1
+		"fur",
+		// 2
+		"blue_gem",
+		// 3
+		"worn_earring",
+		// 4
+		"rusted_key",
+		// 5
+		"spider_silk",
+		// 6
+		"ancient_coin",
+		// 7
+		"cracked_potion",
+		// 8
+		"wolf_tooth",
+		// 9
+		"emerald_shard"
 	};
 
 	// Weapon index for weapon pools
@@ -49,7 +67,17 @@ public class ItemUtils {
 		// "test_weapon",
 
 		// 0
-		"wooden_stick"
+		"wooden_stick",
+		// 1
+		"rusty_dagger",
+		// 2
+		"bone_sword",
+		// 3
+		"iron_axe",
+		// 4
+		"spiked_mace",
+		//5
+		"bone_sword"
 	};
 
 	// Consumable index for consumable pools
@@ -58,6 +86,12 @@ public class ItemUtils {
 		// "test_potion",
 
 		// 0
-		"small_health_potion"
+		"small_health_potion",
+		// 1
+		"stamina_draught",
+		// 2
+		"antidote_vial",
+		// 3
+		"spicy_mushroom"
 	};
 }

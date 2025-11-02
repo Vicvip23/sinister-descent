@@ -14,5 +14,77 @@
 		"description": "It's old, but gold.",
 		"itemType": "item",
 		"level": 10
+	},
+	{
+		"itemId": "fur",
+		"itemName": "Fur",
+		"value": 6,
+		"description": "A patch of fur.",
+		"itemType": "item",
+		"level": 2
+	},
+	{
+		"itemId": "blue_gem",
+		"itemName": "Blue Gem",
+		"value": 30,
+		"description": "A peculiar-looking blue gem.",
+		"itemType": "item",
+		"level": 25
+	},
+	{
+		"itemId": "worn_earring",
+		"itemName": "Worn Earring",
+		"value": 14,
+		"description": "An earring worn with time.",
+		"itemType": "item",
+		"level": 10
+	},
+	{
+		"itemId": "rusted_key",
+		"itemName": "Rusted Key",
+		"value": 8,
+		"description": "A key corroded by age and moisture.",
+		"itemType": "item",
+		"level": 5
+	},
+	{
+		"itemId": "spider_silk",
+		"itemName": "Spider Silk",
+		"value": 12,
+		"description": "Fine, sticky threads from a giant spider.",
+		"itemType": "item",
+		"level": 7
+	},
+	{
+		"itemId": "ancient_coin",
+		"itemName": "Ancient Coin",
+		"value": 25,
+		"description": "A coin bearing the mark of a forgotten empire.",
+		"itemType": "item",
+		"level": 15
+	},
+	{
+		"itemId": "cracked_potion",
+		"itemName": "Cracked Potion",
+		"value": 18,
+		"description": "A vial with a hairline fracture; contents unknown.",
+		"itemType": "item",
+		"level": 12
+	},
+	{
+		"itemId": "wolf_tooth",
+		"itemName": "Wolf Tooth",
+		"value": 10,
+		"description": "A sharp fang pulled from a rabid wolf.",
+		"itemType": "item",
+		"level": 8
+	},
+	{
+		"itemId": "emerald_shard",
+		"itemName": "Emerald Shard",
+		"value": 35,
+		"description": "A fragment of a once-larger emerald.",
+		"itemType": "item",
+		"level": 20
 	}
 ]
